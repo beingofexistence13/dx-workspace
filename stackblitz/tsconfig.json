@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2018",
+    "lib": ["es2018", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "outDir": "./temp/tsc"
+  },
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.test.json"
+    }
+  ]
+}

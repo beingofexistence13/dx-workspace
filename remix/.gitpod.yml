@@ -1,0 +1,4 @@
+tasks:
+    - name: remix-ide
+      init: docker pull remixproject/remix-ide:latest && docker run -p 8080:80 remixproject/remix-ide:latest
+      command: docker run -p 8080:80 remixproject/remix-ide:latest

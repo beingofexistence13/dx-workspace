@@ -1,0 +1,16 @@
+# Build
+bundles
+types
+
+# Dependencies
+node_modules
+
+# Tooling artifacts
+temp
+
+# Misc
+._*
+.DS_Store
+.vscode
+*.log
+*.tgz
