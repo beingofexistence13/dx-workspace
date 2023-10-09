@@ -1,8 +1,8 @@
 # Yowai mo!!!
 1. openvscodeserver + gitpod + gitpod-website + workspace-images -> (gitpods)
-2. remix ide
-3. stackblitzs
-4. codesandbox
+2. remix ide -> (cores)
+3. stackblitzs -> (cores)
+4. codesandbox -> (cores)
 5. code-server + coder -> (coders)
 6. vim +
    neovim +
