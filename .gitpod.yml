@@ -1,16 +1,31 @@
 tasks:
-    - name: monorepo
-      init: |
-          npm install -g npm@10.1.0
-          npm install -g bun
-          git config lfs.https://github.com/beingofexistence/dx.git/info/lfs.locksverify false
-      command: |
-          echo "hello -> beingofexistence"
-    - name: coders
-      init: |
-          cd coders && bash install.sh && coder server
-      command: |
-          echo "hello -> beingofexistence"
+  - name: monorepo
+    init: |
+        npm install -g npm@10.1.0
+        npm install -g bun
+        git config lfs.https://github.com/beingofexistence/dx.git/info/lfs.locksverify false
+    command: |
+        echo "hello -> beingofexistence"
+  - name: coders
+    init: |
+        cd coders && bash install.sh && coder server
+    command: |
+        echo "hello -> beingofexistence"
+  - name: Terminal 1
+    openMode: split-right
+    command: echo 'This is Terminal 1'
+  - name: Terminal 2
+    openMode: split-right
+    command: echo 'This is Terminal 2'
+  - name: Terminal 3
+    openMode: split-right
+    command: echo 'This is Terminal 3'
+  - name: Terminal 4
+    openMode: split-right
+    command: echo 'This is Terminal 4'
+  - name: Terminal 5
+    openMode: split-right
+    command: echo 'This is Terminal 5'
 
 
 
