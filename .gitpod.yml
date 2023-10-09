@@ -6,6 +6,16 @@ tasks:
           git config lfs.https://github.com/beingofexistence/dx.git/info/lfs.locksverify false
       command: |
           echo "hello -> beingofexistence"
+    - name: coders
+      init: |
+          cd coders && bash install.sh && coder server
+      command: |
+          echo "hello -> beingofexistence"
+
+
+
+
+          
         #   docker run -it --init -p 3000:3000 -v "$(pwd):/home/workspace:cached" 7c0e19dd4517
         #   docker pull gitpod/openvscode-server
     # - name: nextui
