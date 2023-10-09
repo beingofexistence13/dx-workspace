@@ -1,4 +1,4 @@
-# Yo ai mo
+# Yowai mo!!!
 1. openvscodeserver + gitpod + gitpod-website + workspace-images -> (gitpods)
 2. remix ide
 3. stackblitzs
