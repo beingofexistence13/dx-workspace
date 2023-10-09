@@ -14,6 +14,26 @@
    notepad-plus-plus ++
    netbeans -> (extras)
 
+🎉🎉🎉 Welcome to the world of **DX-Workspace**! 🎉🎉🎉
+
+**DX-Workspace** is not just a code editor, it's a revolution in the coding world. Built on the solid foundation of **VSCode's OSS**, it brings to you a coding experience like never before. 
+
+Here's why **DX-Workspace** is the ultimate choice for developers around the globe:
+
+1. 🌟 **Feature-Rich**: DX-Workspace is packed to the brim with features! It's designed to cater to all your coding needs, making it the most feature-rich code editor in the market.
+
+2. 💻 **Native VSCode OSS Support**: With native VSCode OSS support, DX-Workspace offers a smooth and familiar experience for developers. You get all the benefits of VSCode, plus a whole lot more!
+
+3. 🚀 **Optimized Workflow**: DX-Workspace is not just a code editor; it's a productivity booster. The optimized workflow allows you to focus on what matters most - writing great code.
+
+4. 👍 **Professional and User-Friendly**: DX-Workspace strikes the perfect balance between professionalism and user-friendliness. Its intuitive interface makes it easy for both beginners and seasoned developers.
+
+5. 🌍 **Community Support**: Being part of the DX-Workspace community means you're never alone. You'll be part of a vibrant, supportive community of developers who are always ready to help.
+
+6. 🔄 **Regular Updates**: With regular updates, DX-Workspace ensures that you're always at the forefront of technology.
+
+So why wait? Make the switch to **DX-Workspace** today and elevate your coding experience! Join the revolution and be part of something big! 🎉👩‍💻👨‍💻🎉
+
 # Visual Studio Code - Open Source ("Code - OSS")
 
 [![Feature Requests](https://img.shields.io/github/issues/microsoft/vscode/feature-request.svg)](https://github.com/microsoft/vscode/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc)
