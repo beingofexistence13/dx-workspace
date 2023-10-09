@@ -1,0 +1,16 @@
+<?php
+
+class MyClass {
+
+    // foo
+    public $foo; // foo
+    /**
+     *
+     * @var string bar
+     */
+    public $bar; // bar
+
+    public function bar() {
+        
+    }
+}

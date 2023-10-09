@@ -1,0 +1,15 @@
+<?php
+
+/** @deprecated */
+class |>CLASS,DEPRECATED:Foo<| {}
+
+/** @deprecated */
+interface |>CLASS,DEPRECATED:Bar<| {}
+
+/** @deprecated */
+trait |>CLASS,DEPRECATED:Baz<| {}
+
+/** @deprecated */
+enum |>CLASS,DEPRECATED:Qux<| {}
+
+?>

@@ -1,0 +1,170 @@
+Code completion result for source line:
+r.send(|)
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CONSTRUCTO AggregateError                  [PUBLIC]   JS Platform
+CONSTRUCTO Array                           [PUBLIC]   JS Platform
+CONSTRUCTO ArrayBuffer                     [PUBLIC]   JS Platform
+CONSTRUCTO ArrayBufferTypes                [PUBLIC]   JS Platform
+CONSTRUCTO ArrayBufferView                 [PUBLIC]   JS Platform
+CONSTRUCTO ArrayLike                       [PUBLIC]   JS Platform
+CONSTRUCTO AsyncGenerator                  [PUBLIC]   JS Platform
+CONSTRUCTO AsyncGeneratorFunction          [PUBLIC]   JS Platform
+CONSTRUCTO AsyncIterable                   [PUBLIC]   JS Platform
+CONSTRUCTO AsyncIterableIterator           [PUBLIC]   JS Platform
+CONSTRUCTO AsyncIterator                   [PUBLIC]   JS Platform
+CONSTRUCTO Atomics                         [PUBLIC]   JS Platform
+CONSTRUCTO BigInt                          [PUBLIC]   JS Platform
+CONSTRUCTO BigInt64Array                   [PUBLIC]   JS Platform
+CONSTRUCTO BigIntToLocaleStringOptions     [PUBLIC]   JS Platform
+CONSTRUCTO BigUint64Array                  [PUBLIC]   JS Platform
+CONSTRUCTO Boolean                         [PUBLIC]   JS Platform
+CONSTRUCTO CallableFunction                [PUBLIC]   JS Platform
+CONSTRUCTO ConcatArray                     [PUBLIC]   JS Platform
+CONSTRUCTO DataView                        [PUBLIC]   JS Platform
+CONSTRUCTO Date                            [PUBLIC]   JS Platform
+CONSTRUCTO Error                           [PUBLIC]   JS Platform
+CONSTRUCTO ErrorOptions                    [PUBLIC]   JS Platform
+CONSTRUCTO EvalError                       [PUBLIC]   JS Platform
+CONSTRUCTO FinalizationRegistry            [PUBLIC]   JS Platform
+CONSTRUCTO Float32Array                    [PUBLIC]   JS Platform
+CONSTRUCTO Float64Array                    [PUBLIC]   JS Platform
+CONSTRUCTO Function                        [PUBLIC]   JS Platform
+CONSTRUCTO Generator                       [PUBLIC]   JS Platform
+CONSTRUCTO GeneratorFunction               [PUBLIC]   JS Platform
+CONSTRUCTO IArguments                      [PUBLIC]   JS Platform
+CONSTRUCTO ImportCallOptions               [PUBLIC]   JS Platform
+CONSTRUCTO ImportMeta                      [PUBLIC]   JS Platform
+CONSTRUCTO Int16Array                      [PUBLIC]   JS Platform
+CONSTRUCTO Int32Array                      [PUBLIC]   JS Platform
+CONSTRUCTO Int8Array                       [PUBLIC]   JS Platform
+CONSTRUCTO Iterable                        [PUBLIC]   JS Platform
+CONSTRUCTO IterableIterator                [PUBLIC]   JS Platform
+CONSTRUCTO Iterator                        [PUBLIC]   JS Platform
+CONSTRUCTO IteratorReturnResult            [PUBLIC]   JS Platform
+CONSTRUCTO IteratorYieldResult             [PUBLIC]   JS Platform
+CONSTRUCTO JSON                            [PUBLIC]   JS Platform
+CONSTRUCTO Map                             [PUBLIC]   JS Platform
+CONSTRUCTO NewableFunction                 [PUBLIC]   JS Platform
+CONSTRUCTO Number                          [PUBLIC]   JS Platform
+CONSTRUCTO Object                          [PUBLIC]   JS Platform
+CONSTRUCTO Promise                         [PUBLIC]   JS Platform
+CONSTRUCTO PromiseFulfilledResult          [PUBLIC]   JS Platform
+CONSTRUCTO PromiseLike                     [PUBLIC]   JS Platform
+CONSTRUCTO PromiseRejectedResult           [PUBLIC]   JS Platform
+CONSTRUCTO PropertyDescriptor              [PUBLIC]   JS Platform
+CONSTRUCTO ProxyHandler                    [PUBLIC]   JS Platform
+CONSTRUCTO RangeError                      [PUBLIC]   JS Platform
+CONSTRUCTO ReadonlyArray                   [PUBLIC]   JS Platform
+CONSTRUCTO ReadonlyMap                     [PUBLIC]   JS Platform
+CONSTRUCTO ReadonlySet                     [PUBLIC]   JS Platform
+CONSTRUCTO ReferenceError                  [PUBLIC]   JS Platform
+CONSTRUCTO RegExp                          [PUBLIC]   JS Platform
+CONSTRUCTO RegExpExecArray                 [PUBLIC]   JS Platform
+CONSTRUCTO RegExpMatchArray                [PUBLIC]   JS Platform
+CONSTRUCTO Requester1                      [PUBLIC]   callback01.js
+CONSTRUCTO Set                             [PUBLIC]   JS Platform
+CONSTRUCTO SharedArrayBuffer               [PUBLIC]   JS Platform
+CONSTRUCTO String                          [PUBLIC]   JS Platform
+CONSTRUCTO Symbol                          [PUBLIC]   JS Platform
+CONSTRUCTO SyntaxError                     [PUBLIC]   JS Platform
+CONSTRUCTO TemplateStringsArray            [PUBLIC]   JS Platform
+CONSTRUCTO TypeError                       [PUBLIC]   JS Platform
+CONSTRUCTO TypedPropertyDescriptor         [PUBLIC]   JS Platform
+CONSTRUCTO URIError                        [PUBLIC]   JS Platform
+CONSTRUCTO Uint16Array                     [PUBLIC]   JS Platform
+CONSTRUCTO Uint32Array                     [PUBLIC]   JS Platform
+CONSTRUCTO Uint8Array                      [PUBLIC]   JS Platform
+CONSTRUCTO Uint8ClampedArray               [PUBLIC]   JS Platform
+CONSTRUCTO WeakMap                         [PUBLIC]   JS Platform
+CONSTRUCTO WeakRef                         [PUBLIC]   JS Platform
+CONSTRUCTO WeakSet                         [PUBLIC]   JS Platform
+METHOD     ImportAssertions                [PUBLIC]   JS Platform
+METHOD     Intl(): undefined               [PUBLIC]   JS Platform
+METHOD     Math                            [PUBLIC]   JS Platform
+METHOD     PropertyDescriptorMap           [PUBLIC]   JS Platform
+METHOD     Proxy                           [PUBLIC]   JS Platform
+METHOD     Reflect(): undefined            [PUBLIC]   JS Platform
+METHOD     ThisType                        [PUBLIC]   JS Platform
+METHOD     assign(target: Object, sources  [PUBLIC,   JS Platform
+METHOD     create(o: null|Object, propert  [PUBLIC,   JS Platform
+METHOD     decodeURI(encodedURI: String):  [PUBLIC]   JS Platform
+METHOD     decodeURIComponent(encodedURIC  [PUBLIC]   JS Platform
+METHOD     defineProperties(o: Object, pr  [PUBLIC,   JS Platform
+METHOD     defineProperty(o: Object, p: N  [PUBLIC,   JS Platform
+METHOD     encodeURI(uri: String): String  [PUBLIC]   JS Platform
+METHOD     encodeURIComponent(uriComponen  [PUBLIC]   JS Platform
+METHOD     entries(o: Object): Object      [PUBLIC,   JS Platform
+METHOD     escape(string: String): String  [PUBLIC]   JS Platform
+METHOD     eval(x: String): Object         [PUBLIC]   JS Platform
+METHOD     freeze(o: Object): Object       [PUBLIC,   JS Platform
+METHOD     fromEntries(entries: Iterable)  [PUBLIC,   JS Platform
+METHOD     getOwnPropertyDescriptor(o: Ob  [PUBLIC,   JS Platform
+METHOD     getOwnPropertyDescriptors(o: O  [PUBLIC,   JS Platform
+METHOD     getOwnPropertyNames(o: Object)  [PUBLIC,   JS Platform
+METHOD     getOwnPropertySymbols(o: Objec  [PUBLIC,   JS Platform
+METHOD     getPrototypeOf(o: Object): Obj  [PUBLIC,   JS Platform
+METHOD     hasOwn(o: Object, v: Number|Sy  [PUBLIC,   JS Platform
+METHOD     hasOwnProperty(v: Number|Symbo  [PUBLIC]   JS Platform
+METHOD     is(value1: Object, value2: Obj  [PUBLIC,   JS Platform
+METHOD     isExtensible(o: Object): Boole  [PUBLIC,   JS Platform
+METHOD     isFinite(number: Number): Bool  [PUBLIC]   JS Platform
+METHOD     isFrozen(o: Object): Boolean    [PUBLIC,   JS Platform
+METHOD     isNaN(number: Number): Boolean  [PUBLIC]   JS Platform
+METHOD     isPrototypeOf(v: Object): Bool  [PUBLIC]   JS Platform
+METHOD     isSealed(o: Object): Boolean    [PUBLIC,   JS Platform
+METHOD     keys(o: Object): String         [PUBLIC,   JS Platform
+METHOD     parseFloat(string: String): Nu  [PUBLIC]   JS Platform
+METHOD     parseInt(string: String): Numb  [PUBLIC]   JS Platform
+METHOD     preventExtensions(o: Object):   [PUBLIC,   JS Platform
+METHOD     propertyIsEnumerable(v: Number  [PUBLIC]   JS Platform
+METHOD     seal(o: Object): Object         [PUBLIC,   JS Platform
+METHOD     setPrototypeOf(o: Object, prot  [PUBLIC,   JS Platform
+METHOD     toLocaleString(): String        [PUBLIC]   JS Platform
+METHOD     toString(): String              [PUBLIC]   JS Platform
+METHOD     unescape(string: String): Stri  [PUBLIC]   JS Platform
+METHOD     valueOf(): Object               [PUBLIC]   JS Platform
+METHOD     values(o: Object): Object       [PUBLIC,   JS Platform
+VARIABLE   Infinity: Number                [PUBLIC]   JS Platform
+VARIABLE   NaN: Number                     [PUBLIC]   JS Platform
+VARIABLE   r: Requester1                   [PUBLIC]   callback01.js
+KEYWORD    async                                      ECMAScript 7 - 2016 (Experimental)
+KEYWORD    await                                      ECMAScript 7 - 2016 (Experimental)
+KEYWORD    break                                      null
+KEYWORD    case                                       null
+KEYWORD    catch                                      null
+KEYWORD    class                                      ECMAScript 6 - 2015
+KEYWORD    const                                      ECMAScript 6 - 2015
+KEYWORD    continue                                   null
+KEYWORD    debugger                                   null
+KEYWORD    default                                    null
+KEYWORD    delete                                     null
+KEYWORD    do                                         null
+KEYWORD    else                                       null
+KEYWORD    export                                     ECMAScript 6 - 2015
+KEYWORD    extends                                    ECMAScript 6 - 2015
+KEYWORD    false                                      null
+KEYWORD    finally                                    null
+KEYWORD    for                                        null
+KEYWORD    function                                   null
+KEYWORD    if                                         null
+KEYWORD    import                                     ECMAScript 6 - 2015
+KEYWORD    in                                         null
+KEYWORD    instanceof                                 null
+KEYWORD    let                                        ECMAScript 6 - 2015
+KEYWORD    new                                        null
+KEYWORD    null                                       null
+KEYWORD    return                                     null
+KEYWORD    super                                      ECMAScript 6 - 2015
+KEYWORD    switch                                     null
+KEYWORD    this                                       null
+KEYWORD    throw                                      null
+KEYWORD    true                                       null
+KEYWORD    try                                        null
+KEYWORD    typeof                                     null
+KEYWORD    var                                        null
+KEYWORD    void                                       null
+KEYWORD    while                                      null
+KEYWORD    with                                       null
+KEYWORD    yield                                      ECMAScript 6 - 2015
+OTHER      function (responseCode: Number  [PUBLIC]   callback01.js

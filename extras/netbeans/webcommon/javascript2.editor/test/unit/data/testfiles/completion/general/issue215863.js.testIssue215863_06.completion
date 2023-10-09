@@ -1,0 +1,6 @@
+Code completion result for source line:
+co|
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+KEYWORD    const                                      ECMAScript 6 - 2015
+KEYWORD    continue                                   null

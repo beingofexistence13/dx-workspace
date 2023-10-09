@@ -1,0 +1,10 @@
+Code completion result for source line:
+var myObject10 = (new myObject()).property1.toLocaleString().fontsize().to|Precision();
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+METHOD     toLocaleLowerCase(): String     [PUBLIC]   JS Platform
+METHOD     toLocaleString(): String        [PUBLIC]   JS Platform
+METHOD     toLocaleUpperCase(): String     [PUBLIC]   JS Platform
+METHOD     toLowerCase(): String           [PUBLIC]   JS Platform
+METHOD     toString(): String              [PUBLIC]   JS Platform
+METHOD     toUpperCase(): String           [PUBLIC]   JS Platform

@@ -1,0 +1,8 @@
+Code completion result for source line:
+r| // this works
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+METHOD     run(): undefined                [PROTECTE  issue234375.js
+FIELD      rypadlo: Boolean                [PUBLIC]   issue234375.js
+VARIABLE   roman: Man                      [PUBLIC]   test01.js
+KEYWORD    return                                     null

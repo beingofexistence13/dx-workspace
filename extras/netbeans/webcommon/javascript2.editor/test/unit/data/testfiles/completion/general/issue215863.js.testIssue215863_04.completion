@@ -1,0 +1,10 @@
+Code completion result for source line:
+a|lert("Text");
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+METHOD     alert()                         [PUBLIC]   issue215863.js
+METHOD     assign(target: Object, sources  [PUBLIC,   JS Platform
+VARIABLE   a1: MyLib.ObjA                  [PUBLIC]   issue251821.js
+VARIABLE   a232376: Turtle                 [PUBLIC]   issue232376.js
+KEYWORD    async                                      ECMAScript 7 - 2016 (Experimental)
+KEYWORD    await                                      ECMAScript 7 - 2016 (Experimental)

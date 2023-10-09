@@ -1,0 +1,31 @@
+<html><body>
+<pre>Code completion result for source line:
+ba.r|esolve();
+(QueryType=COMPLETION, prefixSearch=false, caseSensitive=true)
+------------------------------------
+METHOD     resolve(): String               [PUBLIC]   path.js
+</pre><h2>Documentation:</h2><p>The <code>path.resolve()</code> method resolves a sequence of paths or path segments into
+an absolute path.</p>
+<p>The given sequence of paths is processed from right to left, with each
+subsequent <code>path</code> prepended until an absolute path is constructed.
+For instance, given the sequence of path segments: <code>/foo</code>, <code>/bar</code>, <code>baz</code>,
+calling <code>path.resolve('/foo', '/bar', 'baz')</code> would return <code>/bar/baz</code>
+because <code>'baz'</code> is not an absolute path but <code>'/bar' + '/' + 'baz'</code> is.</p>
+<p>If, after processing all given <code>path</code> segments, an absolute path has not yet
+been generated, the current working directory is used.</p>
+<p>The resulting path is normalized and trailing slashes are removed unless the
+path is resolved to the root directory.</p>
+<p>Zero-length <code>path</code> segments are ignored.</p>
+<p>If no <code>path</code> segments are passed, <code>path.resolve()</code> will return the absolute path
+of the current working directory.</p>
+<pre><code class="language-js">path.resolve('/foo/bar', './baz');
+// Returns: '/foo/bar/baz'
+
+path.resolve('/foo/bar', '/tmp/file/');
+// Returns: '/tmp/file'
+
+path.resolve('wwwroot', 'static_files/png/', '../gif/image.gif');
+// If the current working directory is /home/myself/node,
+// this returns '/home/myself/node/wwwroot/static_files/gif/image.gif'
+</code></pre>
+<p>A <a href="errors.html#class-typeerror"><code>TypeError</code></a> is thrown if any of the arguments is not a string.</p></body></html>

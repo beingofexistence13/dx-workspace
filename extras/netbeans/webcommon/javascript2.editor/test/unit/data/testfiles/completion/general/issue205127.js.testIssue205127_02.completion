@@ -1,0 +1,5 @@
+Code completion result for source line:
+elem.st|yle.color = "FFFFF";
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CLASS      style                           [PUBLIC]   issue205127.js

@@ -1,0 +1,5 @@
+Code completion result for source line:
+document.query|Selector();
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+METHOD     querySelector()                 [PUBLIC]   issue220917.js

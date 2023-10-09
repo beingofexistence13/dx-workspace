@@ -1,0 +1,37 @@
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+
+F89364D98A616CBA66CA535759EA092C54B4BF75 com.oracle.oci.sdk:oci-java-sdk-common:3.9.0
+7BB77013E6B91FCC7CD72D3338EB9F4019E20EA9 com.oracle.oci.sdk:oci-java-sdk-database:3.9.0
+8AB9B9CA57124F30B6D25CBAC944A7CEE0373068 com.oracle.oci.sdk:oci-java-sdk-identity:3.9.0
+F2071C1D75795350EB4D6807C4327AA333C5930C com.oracle.oci.sdk:oci-java-sdk-circuitbreaker:3.9.0
+10D73A80C8F66F959C84189272A7FC1C0CB1C435 com.oracle.oci.sdk:oci-java-sdk-workrequests:3.9.0
+031597E1BEEED3E48203BE6ECEBBA442E6FE177E com.oracle.oci.sdk:oci-java-sdk-devops:3.9.0
+5E52AF447D216717453E91782FCB965DF5669D5C com.oracle.oci.sdk:oci-java-sdk-adm:3.9.0
+C81CF0C79C300BF0526DF80D7890F688C1E32803 com.oracle.oci.sdk:oci-java-sdk-common-httpclient:3.9.0
+19C42576CC31E6028F29639F442EBA0CD895ADB3 com.oracle.oci.sdk:oci-java-sdk-common-httpclient-jersey:3.9.0
+9499C6360FFDBEBC6F0F1285A20DD91485FEDD46 com.oracle.oci.sdk:oci-java-sdk-addons-apache-configurator-jersey:3.9.0
+
+E5F6CAE5CA7ECAAC1EC2827A9E2D65AE2869CADA org.apache.httpcomponents:httpclient:4.5.13
+853B96D3AFBB7BF8CC303FE27EE96836A10C1834 org.apache.httpcomponents:httpcore:4.4.13
+
+442DC1F9FD520130BD18DA938622F4F9B2E5FBA3 org.javassist:javassist:3.25.0-GA
+
+AC1819C47CA19AD686EE015626E77C6DAFE8E862 io.github.resilience4j:resilience4j-circuitbreaker:1.7.1
+0A047BB3AA97387172C88404919313DD8ABACDF9 io.github.resilience4j:resilience4j-core:1.7.1
+DFD5101B17DA36C32AE024B984E0B72712F01A35 io.vavr:vavr:0.10.2
+68F1AF10052713FDA01BFB1E5B831DCF6D826AB2 io.vavr:vavr-match:0.10.2

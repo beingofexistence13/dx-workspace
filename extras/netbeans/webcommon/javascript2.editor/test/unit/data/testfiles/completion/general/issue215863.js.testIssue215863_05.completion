@@ -1,0 +1,7 @@
+Code completion result for source line:
+l|
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CLASS      location                        [PUBLIC]   issue215863.js
+VARIABLE   longString: String              [PUBLIC]   stringLiterals01.js
+KEYWORD    let                                        ECMAScript 6 - 2015

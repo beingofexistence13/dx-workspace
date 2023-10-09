@@ -1,0 +1,7 @@
+Code completion result for source line:
+NetBeans.s|
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CLASS      stuff                           [PUBLIC]   defineMethod.js
+METHOD     seal(o): undefined              [PUBLIC,   JS Platform
+METHOD     setPrototypeOf(o, proto): unde  [PUBLIC,   JS Platform

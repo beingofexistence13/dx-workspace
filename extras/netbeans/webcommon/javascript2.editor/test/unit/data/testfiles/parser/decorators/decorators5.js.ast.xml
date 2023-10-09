@@ -1,0 +1,92 @@
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+
+<FunctionNode name='decorators5.js' kind='MODULE' start='0' end='125'>
+  <isProgram/>
+  <ImportNode start='0' end='41'>
+    <ImportClauseNode start='7' end='17'>
+      <NamedImportsNode start='7' end='17'>
+        <ImportSpecifierNode start='9' end='15'>
+          <IdentNode start='9' end='15'>
+            <name>inject</name>
+          </IdentNode>
+        </ImportSpecifierNode>
+      </NamedImportsNode>
+    </ImportClauseNode>
+    <FromNode start='18' end='41'>
+      <StringLiteralNode value='aurelia-framework' start='24' end='22'/>
+    </FromNode>
+  </ImportNode>
+  <ExportNode start='59' end='122'>
+    <ClassNode ident='Decorators' start='74' end='122'>
+      <!-- ClassNode Constructor -->
+      <ClassElement name='Decorators' start='74' end='122'>
+        <!-- ClassElement Key -->
+        <IdentNode start='80' end='90'>
+          <name>Decorators</name>
+        </IdentNode>
+        <!-- ClassElement Value -->
+        <FunctionNode name='Decorators' kind='NORMAL' start='74' end='122'>
+          <isClassConstructor/>
+          <isMethod/>
+          <isNamedFunctionExpression/>
+          <!-- FunctionNode Parameters -->
+          <!-- FunctionNode Body -->
+          <Block start='74' end='122'>
+            <isFunctionBody/>
+            <!-- Block Statements -->
+          </Block>
+        </FunctionNode>
+        <!-- ClassElement Decorators -->
+      </ClassElement>
+      <!-- ClassNode Elements -->
+      <ClassElement name='test' start='97' end='120'>
+        <!-- ClassElement Key -->
+        <IdentNode start='97' end='101'>
+          <name>test</name>
+          <isPropertyName/>
+        </IdentNode>
+        <!-- ClassElement Value -->
+        <FunctionNode name='test' kind='NORMAL' start='97' end='120'>
+          <isMethod/>
+          <isNamedFunctionExpression/>
+          <!-- FunctionNode Parameters -->
+          <!-- FunctionNode Body -->
+          <Block start='104' end='105'>
+            <isFunctionBody/>
+            <!-- Block Statements -->
+          </Block>
+        </FunctionNode>
+        <!-- ClassElement Decorators -->
+      </ClassElement>
+      <!-- ClassNode Decorators -->
+    </ClassNode>
+  </ExportNode>
+  <!-- FunctionNode Parameters -->
+  <!-- FunctionNode Body -->
+  <Block start='0' end='123'>
+    <isFunctionBody/>
+    <isSynthetic/>
+    <!-- Block Statements -->
+    <EmptyNode start='122' end='123'>
+    </EmptyNode>
+  </Block>
+</FunctionNode>

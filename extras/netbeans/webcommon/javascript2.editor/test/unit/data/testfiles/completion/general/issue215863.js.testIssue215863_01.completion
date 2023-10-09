@@ -1,0 +1,5 @@
+Code completion result for source line:
+window.lo|cation.toString();
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CLASS      location                        [PUBLIC]   issue215863.js

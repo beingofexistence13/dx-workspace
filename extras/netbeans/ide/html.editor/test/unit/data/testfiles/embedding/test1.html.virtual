@@ -1,0 +1,8 @@
+@import "dependenciesTest_moves/one/bb.css";
+ SELECTOR {
+	azimuth: behind;
+}
+
+ SELECTOR {
+	color: #660066;
+}

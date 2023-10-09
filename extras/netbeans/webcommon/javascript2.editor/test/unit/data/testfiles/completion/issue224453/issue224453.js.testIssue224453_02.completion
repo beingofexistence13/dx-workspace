@@ -1,0 +1,7 @@
+Code completion result for source line:
+$scope.s|pecification.id + "/v/" + view);
+(QueryType=COMPLETION, prefixSearch=true, caseSensitive=true)
+------------------------------------
+CLASS      specification                   [PUBLIC]   issue224453.js
+METHOD     seal(o: Object): Object         [PUBLIC,   JS Platform
+METHOD     setPrototypeOf(o: Object, prot  [PUBLIC,   JS Platform
