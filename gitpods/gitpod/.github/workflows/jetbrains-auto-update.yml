@@ -1,0 +1,85 @@
+name: JB Update Latest IDE Images
+on:
+  workflow_dispatch:
+  schedule:
+    # At 11:00 on every day.
+    - cron: "0 11 * * *"
+  push:
+    branches:
+      - "main"
+    paths:
+      - "components/ide/jetbrains/backend-plugin/gradle-latest.properties"
+
+jobs:
+  intellij:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: intellij
+      productCode: IIU
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  goland:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: goland
+      productCode: GO
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  pycharm:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: pycharm
+      productCode: PCP
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  phpstorm:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: phpstorm
+      productCode: PS
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  rubymine:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: rubymine
+      productCode: RM
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  webstorm:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: webstorm
+      productCode: WS
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  rider:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: rider
+      productCode: RD
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}
+  clion:
+    uses: ./.github/workflows/jetbrains-auto-update-template.yml
+    with:
+      productId: clion
+      productCode: CL
+    secrets:
+      projectId: ${{ secrets.GCP_PROJECT_ID }}
+      serviceAccountKey: ${{ secrets.GCP_SA_KEY }}
+      slackWebhook: ${{ secrets.IDE_SLACK_WEBHOOK }}

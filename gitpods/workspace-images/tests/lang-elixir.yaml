@@ -1,0 +1,6 @@
+- desc: it should run elixir
+  command: [elixir,--version]
+  assert:
+  - status == 0
+  - stdout.indexOf("Erlang/OTP 25") != -1
+  - stdout.indexOf("Elixir 1.13.4") != -1

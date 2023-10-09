@@ -1,0 +1,15 @@
+name: Issue Triage
+on:
+  issues:
+    types: [opened]
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: "team: team-experience"

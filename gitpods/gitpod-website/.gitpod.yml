@@ -1,0 +1,37 @@
+image:
+    file: .gitpod.Dockerfile
+
+ports:
+    - port: 5173
+      onOpen: open-preview
+      visibility: public
+      name: Website
+      description: Preview of Website
+    - port: 5900
+      onOpen: ignore
+      name: VNC
+      description: VNC Server
+    - port: 6080
+      onOpen: ignore
+      name: VNC
+      description: VNC Viewer
+
+# List the start up tasks. You can start them in parallel in multiple terminals. See https://www.gitpod.io/docs/configure/workspaces/tasks/
+tasks:
+    - name: Installing Dependencies & Start Dev Server
+      init: npm install
+      command: |
+          cp .env.example .env
+          npm run dev
+    - name: Forward Cypress Base URL
+      command: |
+          export CYPRESS_BASE_URL=$(gp url 5173)
+    - name: ADRs (Architecture Decision Records)
+      command: |
+          npm install -g adr
+          adr list
+
+vscode:
+    extensions:
+        - svelte.svelte-vscode
+        - bradlc.vscode-tailwindcss

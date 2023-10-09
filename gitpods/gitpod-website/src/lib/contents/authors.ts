@@ -1,0 +1,494 @@
+import type { SocialMediaLinks } from '$lib/types/avatars';
+
+export type Author = {
+	name: string;
+	socialProfiles: {
+		github: string;
+		twitter: string;
+		linkedin?: string;
+	};
+	description: string;
+};
+
+export const authors: { [idx: string]: Author } = {
+	svenefftinge: {
+		name: 'Sven Efftinge',
+		socialProfiles: {
+			github: 'svenefftinge',
+			twitter: 'svenefftinge',
+			linkedin: 'efftinge',
+		},
+		description:
+			'Sven loves finding sweet spots in product development. Always keeping an eye on pragmatism and the real benefit for the end user, he has proven to be a creative source for many successful technologies. He is a co-founder of TypeFox, co-lead of Eclipse Theia and product manager of Gitpod.',
+	},
+	mbrevoort: {
+		name: 'Mike Brevoort',
+		socialProfiles: {
+			twitter: 'mbrevoort',
+			github: 'mbrevoort',
+		},
+		description: '',
+	},
+	burningion: {
+		name: 'Kirk Kaiser',
+		socialProfiles: {
+			twitter: 'burningion',
+			github: 'burningion',
+		},
+		description: 'Head of Developer Relations at Gitpod',
+	},
+	meysholdt: {
+		name: 'Moritz Eysholdt',
+		socialProfiles: {
+			github: 'meysholdt',
+			twitter: 'meysholdt',
+			linkedin: 'moritzeysholdt',
+		},
+		description:
+			'Moritz loves to make things works. He is a co-founder of TypeFox and Gitpod.',
+	},
+	akosyakov: {
+		name: 'Anton Kosyakov',
+		socialProfiles: {
+			github: 'akosyakov',
+			twitter: 'akosyakov',
+			linkedin: 'anton-kosyakov-4093b610',
+		},
+		description:
+			'Anton is core committer and co-architect of Eclipse Theia. He is an exceptionally productive coder and a great team player. At the moment he works primarily on Theia, Gitpod, the monaco language client and various associated satellite projects. He also is committer of Xtext.',
+	},
+	geropl: {
+		name: 'Gero Posmyk-Leinemann',
+		socialProfiles: {
+			github: 'geropl',
+			twitter: 'geropl2',
+		},
+		description:
+			'Gero is a passionate software developer with a strong interest in programming languages. He likes to learn new stuff but somehow always turns out to work on the backend side of things. His current pet peeve is Kubernetes and everything around it.',
+	},
+	csweichel: {
+		name: 'Christian Weichel',
+		socialProfiles: {
+			github: 'csweichel',
+			twitter: 'csweichel',
+			linkedin: 'christian-weichel-740b4224',
+		},
+		description:
+			'Christian loves building things, systems and software. Ever keen to solve cross-cutting problems, he has experience in human-computer interaction, embedded software development, and the backend side of things (Kubernetes, Docker).',
+	},
+	iqqbot: {
+		name: 'Pudong Zheng',
+		socialProfiles: {
+			github: 'iqqbot',
+			twitter: '',
+		},
+		description: '',
+	},
+	'mustard-mh': {
+		name: 'Huiwen Huang',
+		socialProfiles: {
+			github: 'mustard-mh',
+			twitter: '',
+		},
+		description: '',
+	},
+	andreafalzetti: {
+		name: 'Andrea Falzetti',
+		socialProfiles: {
+			github: 'andreafalzetti',
+			twitter: '',
+		},
+		description: '',
+	},
+	felladrin: {
+		name: 'Victor Nogueira',
+		socialProfiles: {
+			github: 'felladrin',
+			twitter: '',
+		},
+		description: '',
+	},
+	aledbf: {
+		name: 'Manuel Alejandro de Brito Fontes',
+		socialProfiles: {
+			github: 'aledbf',
+			twitter: 'aledbf',
+			linkedin: 'aledbf',
+		},
+		description: '',
+	},
+	jankeromnes: {
+		name: 'Jan Keromnes',
+		socialProfiles: {
+			github: 'jankeromnes',
+			twitter: 'jankeromnes',
+			linkedin: 'jankeromnes',
+		},
+		description:
+			'Jan is the creator of Janitor, and he has been automating developer environments for almost a decade. He is passionate about making software development saner, easier, and more accessible for all humans.',
+	},
+	loujaybee: {
+		name: 'Lou Bichard',
+		socialProfiles: {
+			github: 'loujaybee',
+			twitter: 'loujaybee',
+			linkedin: 'loujaybee',
+		},
+		description: '',
+	},
+	nisarhassan12: {
+		name: 'Nisar Hassan',
+		socialProfiles: {
+			github: 'nisarhassan12',
+			twitter: 'nisarhassan12',
+			linkedin: 'nisar-hassan-naqvi-413466199',
+		},
+		description:
+			'Nisar is a web developer who creates UX rich performant websites and web applications.',
+	},
+	anudeepreddy: {
+		name: 'Anudeep Reddy',
+		socialProfiles: {
+			github: 'anudeepreddy',
+			twitter: '',
+			linkedin: '',
+		},
+		description: 'Anudeep is a developer advocate at Gitpod.',
+	},
+	spoenemann: {
+		name: 'Miro Spönemann',
+		socialProfiles: {
+			github: 'spoenemann',
+			twitter: 'sponemann',
+			linkedin: 'mirospoenemann',
+		},
+		description:
+			'Miro is thrilled about innovation on programming languages, DSLs, graphical modeling and web technologies.',
+	},
+	JesterOrNot: {
+		name: 'Sean Hellum',
+		socialProfiles: {
+			github: 'JesterOrNot',
+			twitter: '',
+			linkedin: 'sean-hellum-84ba401a2',
+		},
+		description:
+			'Sean is a developer advocate and rustacean with a passion for Docker, Linux, Bash, Rust, and CLIs',
+	},
+	JohannesLandgraf: {
+		name: 'Johannes Landgraf',
+		socialProfiles: {
+			github: 'JohannesLandgraf',
+			twitter: 'jolandgraf',
+			linkedin: 'johanneslandgraf',
+		},
+		description:
+			'Johannes is CEO at Gitpod and helps professional development teams to embrace fully set-up, remote dev environments. Before that he worked in Venture Capital focusing on everything around open source and developer tools.',
+	},
+	corneliusludmann: {
+		name: 'Cornelius Ludmann',
+		socialProfiles: {
+			github: 'corneliusludmann',
+			twitter: 'ludmann',
+			linkedin: 'corneliusludmann',
+		},
+		description: '',
+	},
+	ghuntley: {
+		name: 'Geoffrey Huntley',
+		socialProfiles: {
+			github: 'ghuntley',
+			twitter: 'geoffreyhuntley',
+			linkedin: 'geoffreyhuntley',
+		},
+		description:
+			"After many previous adventures involving cycling through many countries on a unicycle Geoff now lives a minimalist lifestyle in a van that is slowly working its' way around Australia. On an average day™ at Gitpod you'll find him shipping features along side the engineering team, crafting code examples and authoring documentation.",
+	},
+	mikenikles: {
+		name: 'Mike Nikles',
+		socialProfiles: {
+			github: 'mikenikles',
+			twitter: 'mikenikles',
+			linkedin: 'mikenikles',
+		},
+		description:
+			'Mike is a software architect who values developer experience, productivity and team morale. He is on a journey to help developers let go of their local developer environments and embrace automated, ephemeral developer environments.',
+	},
+	arthursens: {
+		name: 'Arthur Sens',
+		socialProfiles: {
+			github: 'arthursens',
+			twitter: 'ArthurSilvaSens',
+			linkedin: 'arthursilvasens',
+		},
+		description:
+			"A big open-source fan, Arthur is a SRE focused on cloud-native observability. When not training backflips and gymnastics, you can find him chit-chatting at CNCF's slack channels.",
+	},
+	chrifro: {
+		name: 'Christin Frohne',
+		socialProfiles: {
+			github: 'chrifro',
+			twitter: 'christinfrohne',
+			linkedin: 'christin-frohne-91a4b0173',
+		},
+		description:
+			'Christin is our Marketing Manager at Gitpod. She is eager to create a great brand experience and favors going the unconventional way. In her free time, she loves to be out in the nature, climbing rocks and practising yoga.',
+	},
+	pawlean: {
+		name: 'Pauline Narvas',
+		socialProfiles: {
+			github: 'pawlean',
+			twitter: 'paulienuh',
+			linkedin: 'pnarvas',
+		},
+		description: '',
+	},
+	phimae: {
+		name: 'Philipp Mägel',
+		socialProfiles: {
+			github: 'phimae',
+			twitter: 'philmaegel',
+			linkedin: 'phimae',
+		},
+		description:
+			"Philipp is a Chief of Staff at Gitpod focusing on company building and driving out-of-product growth initiatives. Previously, Philipp was part of Google's APAC Corporate Strategy & Planning team based out of Singapore.",
+	},
+	'rl-gitpod': {
+		name: 'Robert Leftwich',
+		socialProfiles: {
+			github: 'rl-gitpod',
+			twitter: '',
+			linkedin: 'robert-leftwich',
+		},
+		description:
+			"Robert loves to code and lives off-grid... although the other way around is probably more accurate. Engineering systems of all shapes and sizes with many different teams highlighted the need for Gitpod's blazingly fast, ephemeral and secure developer environments time and time again - he is helping make that happen.",
+	},
+	gtsiolis: {
+		name: 'George Tsiolis',
+		socialProfiles: {
+			github: 'gtsiolis',
+			twitter: 'gtsiolis',
+			linkedin: '',
+		},
+		description: '',
+	},
+	jeanp413: {
+		name: 'Jean Pierre Huaroto',
+		socialProfiles: {
+			github: 'jeanp413',
+			twitter: '',
+			linkedin: 'jeanpierrehuaroto',
+		},
+		description: '',
+	},
+	ellenchisa: {
+		name: 'Ellen Chisa',
+		socialProfiles: {
+			github: 'ellenchisa',
+			twitter: 'ellenchisa',
+			linkedin: 'ellenchisa',
+		},
+		description: '',
+	},
+	kylos101: {
+		name: 'Kyle Brennan',
+		socialProfiles: {
+			github: 'kylos101',
+			twitter: 'kylos101',
+			linkedin: '',
+		},
+		description: '',
+	},
+	sagor999: {
+		name: 'Pavel Tumik',
+		socialProfiles: {
+			github: 'sagor999',
+			twitter: 'pavel_tumik',
+			linkedin: 'sagor',
+		},
+		description: '',
+	},
+	Furisto: {
+		name: 'Thomas Schubart',
+		socialProfiles: {
+			github: 'Furisto',
+			twitter: '',
+			linkedin: '',
+		},
+		description: '',
+	},
+	lucasvaltl: {
+		name: 'Lucas Valtl',
+		socialProfiles: {
+			github: 'lucasvaltl',
+			twitter: '',
+			linkedin: '',
+		},
+		description: '',
+	},
+	brandonroberts: {
+		name: 'Brandon Roberts',
+		socialProfiles: {
+			github: 'brandonroberts',
+			twitter: '',
+			linkedin: '',
+		},
+		description: '',
+	},
+	MrSimonEmms: {
+		name: 'Simon Emms',
+		socialProfiles: {
+			github: 'MrSimonEmms',
+			twitter: 'TheShroppieBeek',
+		},
+		description: '',
+	},
+	'nancy-chauhan': {
+		name: 'Nancy Chauhan',
+		socialProfiles: {
+			github: '',
+			twitter: '_nancychauhan',
+			linkedin: '',
+		},
+		description: '',
+	},
+	helenjoscott: {
+		name: 'Helen Scott',
+		socialProfiles: {
+			github: '',
+			twitter: 'HelenJoScott',
+			linkedin: '',
+		},
+		description:
+			'Helen Scott is a Java Developer Advocate at JetBrains. She has worked at numerous software companies in the last 20 years.',
+	},
+	jacobparis: {
+		name: 'Jacob Paris',
+		socialProfiles: {
+			github: 'JacobParis',
+			twitter: 'jacobmparis',
+			linkedin: '',
+		},
+		description: '',
+	},
+	michaelaring: {
+		name: 'Michael Aring',
+		socialProfiles: {
+			github: 'MichaelAring',
+			twitter: 'michaelar1ng',
+			linkedin: '',
+		},
+		description: '',
+	},
+	securitymirco: {
+		name: 'Mirco Kater',
+		socialProfiles: {
+			github: 'securitymirco',
+			twitter: 'securitymirco',
+			linkedin: '',
+		},
+		description: '',
+	},
+	axonasif: {
+		name: 'Aminur Rahman',
+		socialProfiles: {
+			github: 'axonasif',
+			twitter: 'axonasif',
+		},
+		description: '',
+	},
+	'Siddhant-K-code': {
+		name: 'Siddhant Khare',
+		socialProfiles: {
+			github: 'Siddhant-K-code',
+			twitter: 'Siddhant_K_code',
+		},
+		description: '',
+	},
+	whummer: {
+		name: 'Waldemar Hummer',
+		socialProfiles: {
+			github: 'whummer',
+			twitter: 'w_hummer',
+		},
+		description: '',
+	},
+	jldec: {
+		name: 'Jürgen Leschner',
+		socialProfiles: {
+			github: 'jldec',
+			twitter: 'jldec',
+		},
+		description: '',
+	},
+	atduarte: {
+		name: 'André Duarte',
+		socialProfiles: {
+			twitter: 'atduarte',
+			github: 'andre-duarte-',
+		},
+		description: '',
+	},
+	maciejwalkowiak: {
+		name: 'Maciej Walkowiak',
+		socialProfiles: {
+			github: 'maciejwalkowiak',
+			twitter: 'maciejwalkowiak',
+		},
+		description: '',
+	},
+	evoxmusic: {
+		name: 'Romaric',
+		socialProfiles: {
+			github: 'evoxmusic',
+			twitter: 'rophilogene',
+		},
+		description: '',
+	},
+	Albanetonnellier: {
+		name: 'Albane Tonnellier',
+		socialProfiles: {
+			github: 'Albanetonnellier',
+			twitter: 'Albanetnl',
+		},
+		description: '',
+	},
+	jakobhero: {
+		name: 'Jakob Herold',
+		socialProfiles: {
+			github: 'jakobhero',
+			twitter: '',
+			linkedin: 'jakob-herold',
+		},
+		description:
+			'Jakob is Head of Data at Gitpod. Chat with him about how to lever tools of the modern data stack in small teams.',
+	},
+	ejoreo: {
+		name: "Eric O'Rear",
+		socialProfiles: {
+			github: 'ejoreo',
+			twitter: 'ejoreo24',
+		},
+		description: '',
+	},
+	taliamoyal: {
+		name: 'Talia Moyal',
+		socialProfiles: {
+			github: 'taliamoyal',
+			twitter: '',
+			linkedin: 'taliamoyal',
+		},
+		description: '',
+	},
+};
+
+export const authorSocialMediaLinks: SocialMediaLinks = Object.entries(
+	authors,
+).reduce((displayNames, [username, profile]) => {
+	displayNames[username] = profile.socialProfiles.twitter
+		? `https://twitter.com/${profile.socialProfiles.twitter}`
+		: profile.socialProfiles.linkedin
+		? `https://www.linkedin.com/in/${profile.socialProfiles.linkedin}`
+		: `https://github.com/${profile.socialProfiles.github}`;
+	return displayNames;
+}, {});

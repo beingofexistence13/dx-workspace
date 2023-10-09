@@ -1,0 +1,74 @@
+on:
+  workflow_call:
+    inputs:
+      productId:
+        type: string
+        required: true
+      productCode:
+        type: string
+        required: true
+    secrets:
+      projectId:
+        required: true
+      serviceAccountKey:
+        required: true
+      slackWebhook:
+        required: true
+
+jobs:
+  update-jetbrains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.19"
+      - name: Download leeway
+        run: cd /usr/local/bin && curl -fsSL https://github.com/gitpod-io/leeway/releases/download/v0.7.3/leeway_0.7.3_Linux_x86_64.tar.gz | tar xz
+      - name: Download golangci-lint
+        run: cd /usr/local && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.49.0
+      - name: Download GoKart
+        run: cd /usr/local/bin && curl -L https://github.com/praetorian-inc/gokart/releases/download/v0.4.0/gokart_0.4.0_linux_x86_64.tar.gz | tar xzv gokart
+      - name: Auth Google Cloud SDK
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.serviceAccountKey }}
+      - uses: actions/setup-java@v2
+        with:
+          distribution: zulu
+          java-version: "11"
+      - name: Setup Google Cloud
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.projectId }}
+      - name: Find IDE version to download
+        id: ide-version
+        run: |
+          IDE_VERSIONS_JSON=$(bash ./components/ide/jetbrains/image/resolve-latest-ide-version.sh ${{ inputs.productCode }})
+          IDE_BUILD_VERSION=$(echo "$IDE_VERSIONS_JSON" | jq -r .IDE_BUILD_VERSION)
+          IDE_VERSION=$(echo "$IDE_VERSIONS_JSON" | jq -r .IDE_VERSION)
+          echo "IDE_BUILD_VERSION: $IDE_BUILD_VERSION"
+          echo "IDE_VERSION: $IDE_VERSION"
+          echo "::set-output name=ideBuildVersion::$IDE_BUILD_VERSION"
+          echo "::set-output name=ideVersion::$IDE_VERSION"
+      - name: Leeway build
+        if: ${{ steps.ide-version.outputs.ideBuildVersion }}
+        env:
+          LEEWAY_MAX_PROVENANCE_BUNDLE_SIZE: "8388608"
+          LEEWAY_REMOTE_CACHE_BUCKET: '${{ needs.configuration.outputs.leeway_cache_bucket }}'
+        run: |
+          gcloud auth configure-docker --quiet
+          export LEEWAY_WORKSPACE_ROOT=$(pwd)
+          cd components/ide/jetbrains/image
+          leeway build -Dversion=latest -DimageRepoBase=eu.gcr.io/gitpod-core-dev/build -DbuildNumber=${{ steps.ide-version.outputs.ideBuildVersion }} .:${{ inputs.productId }}-latest -DjbBackendVersion=${{ steps.ide-version.outputs.ideVersion }}
+      - name: Get previous job's status
+        id: lastrun
+        uses: filiptronicek/get-last-job-status@main
+      - name: Slack Notification
+        if: ${{ (success() && steps.lastrun.outputs.status == 'failed') || failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.slackWebhook }}
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: ${{ inputs.productId }}
+          SLACK_FOOTER: "<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|Workflow logs>"

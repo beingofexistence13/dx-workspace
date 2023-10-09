@@ -1,0 +1,348 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		background-repeat: no-repeat;
+	}
+
+	:root {
+		font-size: 16px;
+	}
+
+	html {
+		@apply box-border overflow-x-hidden;
+	}
+
+	body {
+		font-family: var(--font);
+		text-rendering: optimizeSpeed;
+		line-height: 1.5;
+		@apply m-0 min-h-screen text-body bg-bg text-p-medium;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 600; /* this is default. it's removed in TW. Should we just remove it from the TW reset? */
+		@apply text-important;
+	}
+
+	/* Make images easier to work with */
+	img,
+	picture {
+		@apply max-w-full block object-contain;
+	}
+
+	a,
+	button {
+		@apply transition-all duration-200 delay-[50ms];
+	}
+
+	a {
+		@apply underline text-link-grey dark:text-body underline-offset-[0.25em];
+	}
+	a:hover,
+	a:focus,
+	a:active {
+		@apply text-important underline decoration-transparent;
+	}
+
+	a[class] {
+		@apply no-underline;
+	}
+
+	ul:where([class]),
+	ol:where([class]) {
+		@apply m-0 p-0 list-none;
+		list-style: none;
+	}
+
+	a,
+	summary,
+	button {
+		@apply cursor-pointer;
+	}
+
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
+
+@layer components {
+	.ol-roman {
+		@apply list-outside list-roman;
+	}
+	.ol-decimal {
+		@apply list-outside list-decimal;
+	}
+	.ol-alpha {
+		@apply list-outside list-alpha;
+	}
+
+	.stroked {
+		@apply relative;
+		z-index: 0;
+
+		&::before {
+			content: '';
+			@apply absolute top-0 left-0 right-0 bottom-0;
+			background: linear-gradient(to bottom, #ffffff, #ece7e5);
+			border-radius: inherit;
+			z-index: -3;
+		}
+
+		&::after {
+			content: '';
+			@apply absolute bg-card transition-all duration-200;
+			border-radius: inherit;
+			top: 1px;
+			bottom: 1px;
+			left: 1px;
+			right: 1px;
+			z-index: -2;
+		}
+	}
+
+	.stroked-light {
+		&::after {
+			@apply bg-white dark:bg-card;
+		}
+	}
+
+	.stroked-sand {
+		&::after {
+			@apply bg-sand-dark dark:bg-card;
+		}
+	}
+
+	.stroked-divider {
+		&::after {
+			@apply bg-divider dark:bg-card;
+		}
+	}
+
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		.icon.icon-link {
+			@apply inline-block ml-2;
+			&::after {
+				content: '';
+				@apply inline-block opacity-0 bg-cover;
+				width: 22px;
+				height: 18px;
+				background-image: url('/svg/headling-link.svg');
+				transition: all 0.2s 50ms;
+			}
+		}
+
+		& {
+			&:hover,
+			&:focus,
+			a:hover,
+			a:focus {
+				.icon-link::after {
+					@apply opacity-100;
+				}
+			}
+		}
+
+		a {
+			&:hover,
+			&:focus {
+				&::after {
+					@apply opacity-100 !important;
+				}
+			}
+		}
+	}
+
+	.code {
+		@apply rounded-xl text-dark-grey;
+		padding: 0.3rem 0.5rem;
+		background: var(--brand-light);
+		white-space: break-spaces;
+		overflow-wrap: break-word;
+	}
+
+	kbd > kbd {
+		background-color: #eee;
+		border-radius: 3px;
+		border: 1px solid #b4b4b4;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+			0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+		color: #333;
+		display: inline-block;
+		font-size: 0.85em;
+		line-height: 1;
+		padding: 2px 4px;
+		white-space: nowrap;
+	}
+
+	kbd > samp {
+		background: var(--brand-light);
+		border-radius: 3px;
+		border: 1px solid #b4b4b4;
+		color: #333;
+		display: inline-block;
+		font-size: 0.85em;
+		line-height: 1;
+		padding: 2px 4px;
+		white-space: nowrap;
+	}
+
+	.text-large .code {
+		@apply py-0;
+	}
+
+	body.dark .stroked {
+		&::before {
+			background: linear-gradient(to bottom, #332d23, #0f0e0b);
+		}
+	}
+
+	body.dark {
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			&:hover,
+			&:focus {
+				.icon.icon-link::after {
+					filter: invert(100%) grayscale(100%);
+				}
+			}
+		}
+	}
+}
+
+.docs-toc-item::before {
+	@apply absolute left-[3px];
+	content: url(/svg/docs/fold.svg);
+}
+
+/* Scrollbar */
+body::-webkit-scrollbar {
+	background-color: var(--white);
+	width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+	background-color: var(--white);
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #ece7e5;
+	border-radius: 12px;
+	border: 2px solid var(--white);
+}
+
+body::-webkit-scrollbar-button {
+	display: none;
+}
+
+/* Dark Mode of Scrollbar */
+body.dark::-webkit-scrollbar {
+	background-color: var(--slight-grey);
+	width: 12px;
+}
+
+body.dark::-webkit-scrollbar-track {
+	background-color: var(--mid-black);
+}
+
+body.dark::-webkit-scrollbar-thumb {
+	background-color: var(--light-black);
+	border-radius: 12px;
+	border: 2px solid var(--mid-black);
+}
+
+body.dark::-webkit-scrollbar-button {
+	display: none;
+}
+
+/* Left Menu Items and Pre tag Scrollbar */
+ul::-webkit-scrollbar,
+div::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+	background-color: var(--white);
+	width: 12px;
+	height: 12px;
+	border-radius: 100px;
+}
+
+ul::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track {
+	background-color: var(--white);
+	border-radius: 100px;
+}
+
+ul::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+	background-color: #ece7e5;
+	border-radius: 12px;
+	border: 2px solid var(--white);
+}
+
+ul::-webkit-scrollbar-corner,
+pre::-webkit-scrollbar-corner,
+div::-webkit-scrollbar-corner {
+	border-radius: 50%;
+}
+
+/* Dark Mode of Left Menu Items and Pre tag Scrollbar*/
+.dark ul::-webkit-scrollbar,
+.dark div::-webkit-scrollbar,
+.dark pre::-webkit-scrollbar {
+	background-color: var(--mid-black);
+}
+
+.dark ul::-webkit-scrollbar-track,
+.dark div::-webkit-scrollbar-track,
+.dark pre::-webkit-scrollbar-track {
+	background-color: var(--mid-black);
+}
+
+.dark ul::-webkit-scrollbar-thumb,
+.dark div::-webkit-scrollbar-thumb,
+.dark pre::-webkit-scrollbar-thumb {
+	background-color: var(--light-black);
+	border: 2px solid var(--mid-black);
+}
+
+.dark ul::-webkit-scrollbar-corner,
+.dark pre::-webkit-scrollbar-corner,
+.dark div::-webkit-scrollbar-corner {
+	border-radius: 50%;
+}
+
+/* CSS adjustment for pre tag */
+pre::-webkit-scrollbar-track {
+	margin: 5px;
+}

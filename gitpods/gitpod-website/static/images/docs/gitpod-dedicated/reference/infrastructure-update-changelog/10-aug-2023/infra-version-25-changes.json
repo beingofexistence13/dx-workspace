@@ -1,0 +1,1462 @@
+[
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "autoscalingservicelinkedrolechecker",
+      "resourceType": "Custom::ServiceLinkedRoleChecker",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "cellstatecontrollercanaccessssm288FE590",
+      "physicalResourceId": "gitpo-cells-nXxYflfzFs1G",
+      "resourceType": "AWS::IAM::Policy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "celltelemetrycontrollercloudwatchA40B458F",
+      "physicalResourceId": "gitpo-cellt-GmlCpCKbGfma",
+      "resourceType": "AWS::IAM::Policy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "cleanupjoinedstate",
+      "resourceType": "Custom::CleanupJoinedState",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "devcelltestdoptigcloudprivateB74E392D",
+      "resourceType": "AWS::Route53::HostedZone",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Remove",
+      "logicalResourceId": "hmactokensecret17655CEE",
+      "physicalResourceId": "arn:aws:secretsmanager:eu-central-1:505100584189:secret:/celltoken/dev-cell-KJRVtT",
+      "resourceType": "AWS::SecretsManager::Secret",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaappcontrollerF7312271",
+      "physicalResourceId": "gitpod-cell-lambdaappcontrollerF7312271-tYYxUNFXmgsa",
+      "resourceType": "AWS::Lambda::Function",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Environment",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Code",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdaappcontrollerlg1AFEB3ED",
+      "resourceType": "AWS::Logs::LogGroup",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaappcontrollersub3C4A7DB9",
+      "physicalResourceId": "1f4d0b0b-93ee-46c7-958c-939edbd68a58",
+      "resourceType": "AWS::Lambda::EventSourceMapping",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceReference",
+          "causingEntity": "lambdaappcontrollerF7312271"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaappcontrollertrigger6F96C5C2",
+      "physicalResourceId": "gitpod-cell-lambdaappcontrollertrigger6F96C5C2-ZO651GXC6D9B",
+      "resourceType": "AWS::Events::Rule",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Targets",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaappcontrollerF7312271.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaappcontrollertriggerAllowEventRulegitpodcelllambdaappcontroller51F794E9707EA9ED",
+      "physicalResourceId": "gitpod-cell-lambdaappcontrollertriggerAllowEventRulegitpodcelllambdaappcontroller51F794-7HpFLwfZTANq",
+      "resourceType": "AWS::Lambda::Permission",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaappcontrollerF7312271.Arn"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "SourceArn",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaappcontrollertrigger6F96C5C2.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaappctrlpolicyF8E18B9E",
+      "physicalResourceId": "gitpo-lambd-60woRcycMIv7",
+      "resourceType": "AWS::IAM::Policy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacellstatecontroller61D4951F",
+      "physicalResourceId": "gitpod-cell-lambdacellstatecontroller61D4951F-XSqUvLjpZA6p",
+      "resourceType": "AWS::Lambda::Function",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Environment",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Code",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdacellstatecontrollerlgA8FD0249",
+      "resourceType": "AWS::Logs::LogGroup",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacellstatecontrollersubBDCC7532",
+      "physicalResourceId": "cd53bb9a-d948-4df4-8f24-7cd2f75df8e7",
+      "resourceType": "AWS::Lambda::EventSourceMapping",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceReference",
+          "causingEntity": "lambdacellstatecontroller61D4951F"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacellstatecontrollertrigger22C83E45",
+      "physicalResourceId": "gitpod-cell-lambdacellstatecontrollertrigger22C83E-1IX1M34NDCF2X",
+      "resourceType": "AWS::Events::Rule",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Targets",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdacellstatecontroller61D4951F.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacellstatecontrollertriggerAllowEventRulegitpodcelllambdacellstatecontrollerA4D75CBE58F55204",
+      "physicalResourceId": "gitpod-cell-lambdacellstatecontrollertriggerAllowEventRulegitpodcelllambdacellstatecont-NCycIcVAfcRY",
+      "resourceType": "AWS::Lambda::Permission",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "SourceArn",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdacellstatecontrollertrigger22C83E45.Arn"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdacellstatecontroller61D4951F.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacelltelemetrycontroller6A531A45",
+      "physicalResourceId": "gitpod-cell-lambdacelltelemetrycontroller6A531A45-sUzMODh9GG6Z",
+      "resourceType": "AWS::Lambda::Function",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Code",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdacelltelemetrycontrollerlg4F6AFB30",
+      "resourceType": "AWS::Logs::LogGroup",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdacelltelemetrycontrollersub89A0EEF6",
+      "physicalResourceId": "95dbb0d0-c11d-4e8e-a9e7-d06c8be72114",
+      "resourceType": "AWS::Lambda::EventSourceMapping",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "ResourceReference",
+          "causingEntity": "lambdacelltelemetrycontroller6A531A45"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdacelltelemetrycontrollertriggerAllowEventRulegitpodcelllambdacelltelemetrycontrollerB00E30F40A387296",
+      "resourceType": "AWS::Lambda::Permission",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdacelltelemetrycontrollertriggerFF645305",
+      "resourceType": "AWS::Events::Rule",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdaclustercontrollerlg993C1D38",
+      "resourceType": "AWS::Logs::LogGroup",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaclustercontrollertriggerAllowEventRulegitpodcelllambdaclusterctrlfunc8190423C9A3F6103",
+      "physicalResourceId": "gitpod-cell-lambdaclustercontrollertriggerAllowEventRulegitpodcelllambdaclusterctrlfunc-WM0Vqx2t3ofa",
+      "resourceType": "AWS::Lambda::Permission",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "SourceArn",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaclustercontrollertriggerF38480D4.Arn"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "FunctionName",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaclusterctrlfunc58E6D838.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaclustercontrollertriggerF38480D4",
+      "physicalResourceId": "gitpod-cell-lambdaclustercontrollertriggerF38480D4-139544TT2EZJT",
+      "resourceType": "AWS::Events::Rule",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Targets",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "lambdaclusterctrlfunc58E6D838.Arn"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaclusterctrldcpolicyB13892E2",
+      "physicalResourceId": "gitpo-lambd-Ab21K7ROWo4J",
+      "resourceType": "AWS::IAM::Policy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdaclusterctrlfunc58E6D838",
+      "physicalResourceId": "gitpod-cell-lambdaclusterctrlfunc58E6D838-O0QZAklZDkfS",
+      "resourceType": "AWS::Lambda::Function",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Environment",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Code",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdainfractrlpolicy0C9FAD79",
+      "resourceType": "AWS::IAM::Policy",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdainfractrlrole6B2F5BAA",
+      "resourceType": "AWS::IAM::Role",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "lambdainfrastructurecontroller27485CBB",
+      "resourceType": "AWS::Lambda::Function",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metaawsauthec2AC864EFD641a0cee2d30d2eb",
+      "physicalResourceId": "i-079b59519b2cdc704",
+      "resourceType": "AWS::EC2::Instance",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "BlockDeviceMappings",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "UserData",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metametalaunchtemplate",
+      "physicalResourceId": "lt-03862c20653161d9f",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metametanodegroup",
+      "physicalResourceId": "meta-meta-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "metametalaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metamonitoringlaunchtemplate",
+      "physicalResourceId": "lt-00568597668c4ed31",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metamonitoringnodegroup",
+      "physicalResourceId": "meta-monitoring-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "metamonitoringlaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metasubneteucentral1aSubnetA2788F7F",
+      "physicalResourceId": "subnet-03f5709d5cea08f17",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metasubneteucentral1bSubnet975A8E6A",
+      "physicalResourceId": "subnet-02d4402db98eb5373",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "metasubneteucentral1cSubnetB5FE5436",
+      "physicalResourceId": "subnet-0643eca61416ed844",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "mgmtsubneteucentral1aSubnetB68440CD",
+      "physicalResourceId": "subnet-055461463b52b4048",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "mgmtsubneteucentral1bSubnet1EE7B966",
+      "physicalResourceId": "subnet-0abafde11c6bfc521",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "mgmtsubneteucentral1cSubnet48EA0E2F",
+      "physicalResourceId": "subnet-0eb90cfc17238635e",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "nlbservicesrecord",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "privatemetaproxy",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "privatewildcardlocalsshv4",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "privatewildcardlocalsshv6",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "privatewildcardmetaproxy",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "privatewsproxy",
+      "resourceType": "AWS::Route53::RecordSet",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "rdssubneteucentral1aSubnet3079CB4D",
+      "physicalResourceId": "subnet-00490cbe676e29931",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "rdssubneteucentral1bSubnet0FFCF356",
+      "physicalResourceId": "subnet-0ee9222c12d462bea",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "rdssubneteucentral1cSubnetF7236A73",
+      "physicalResourceId": "subnet-07af51d8d964f776e",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "relaysubneteucentral1aSubnetCEA47995",
+      "physicalResourceId": "subnet-0add97f0c0022ad97",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "relaysubneteucentral1bSubnetE7177F0A",
+      "physicalResourceId": "subnet-05c267b83c039158b",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "relaysubneteucentral1cSubnetFA5E0B7C",
+      "physicalResourceId": "subnet-04c4a231e7a5d2b9f",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "ssmingressinfo427562B1",
+      "physicalResourceId": "/cell/dev-cell/ingress",
+      "resourceType": "AWS::SSM::Parameter",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Value",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceawsauthec22D862A34641a0cee2d30d2eb",
+      "physicalResourceId": "i-0dcb3107a9a040007",
+      "resourceType": "AWS::EC2::Instance",
+      "replacement": "True",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "BlockDeviceMappings",
+            "requiresRecreation": "Always"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "UserData",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceheadlesslaunchtemplate",
+      "physicalResourceId": "lt-0cf55ddd2c2f4a986",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceheadlessnodegroup",
+      "physicalResourceId": "workspace-headless-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "workspaceheadlesslaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspacemonitoringlaunchtemplate",
+      "physicalResourceId": "lt-05b9edf9feb49d3bf",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspacemonitoringnodegroup",
+      "physicalResourceId": "workspace-monitoring-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "workspacemonitoringlaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceserviceslaunchtemplate",
+      "physicalResourceId": "lt-0ba9561632e465933",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceservicesnodegroup",
+      "physicalResourceId": "workspace-services-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "workspaceserviceslaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspacesubneteucentral1aSubnet7D18E2EC",
+      "physicalResourceId": "subnet-0ea053613b7e4bdb3",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspacesubneteucentral1bSubnet812EB986",
+      "physicalResourceId": "subnet-0cc162ddc30a1a1ba",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspacesubneteucentral1cSubnet3E2B5839",
+      "physicalResourceId": "subnet-078f88207bb1070d4",
+      "resourceType": "AWS::EC2::Subnet",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "MapPublicIpOnLaunch",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceworkspaceslaunchtemplate",
+      "physicalResourceId": "lt-04750725e1b55cf3e",
+      "resourceType": "AWS::EC2::LaunchTemplate",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplateData",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "workspaceworkspacesnodegroup",
+      "physicalResourceId": "workspace-workspaces-nodegroup",
+      "resourceType": "AWS::AutoScaling::AutoScalingGroup",
+      "replacement": "Conditional",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "LaunchTemplate",
+            "requiresRecreation": "Conditionally"
+          },
+          "evaluation": "Dynamic",
+          "changeSource": "ResourceAttribute",
+          "causingEntity": "workspaceworkspaceslaunchtemplate.LatestVersionNumber"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "imagebuilderpolicy",
+      "physicalResourceId": "arn:aws:iam::877922613839:policy/ImageBuilder",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  }
+]

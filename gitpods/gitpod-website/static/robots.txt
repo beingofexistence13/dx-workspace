@@ -1,0 +1,5 @@
+# Algolia-Crawler-Verif: ADCFF91CFFF07E1D
+
+User-agent: *
+Allow: /
+Sitemap: https://www.gitpod.io/sitemap.xml

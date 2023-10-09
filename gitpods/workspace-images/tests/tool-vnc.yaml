@@ -1,0 +1,10 @@
+- desc: "it should have tiger-vnc installed"
+  command: [which, vncserver]
+  assert:
+  - status == 0
+  - stdout.indexOf("/bin/vncserver") != -1
+
+- desc: "the vnc session should start"
+  command: [gp-vncsession]
+  assert:
+  - status == 0

@@ -1,0 +1,90 @@
+name: Build from Pull Request
+on:
+  pull_request:
+
+jobs:
+  create-runner:
+    uses: gitpod-io/gce-github-runner/.github/workflows/create-vm.yml@main
+    secrets:
+      runner_token: ${{ secrets.SELF_HOSTED_GITHUB_RUNNER_TOKEN }}
+      gcp_credentials: ${{ secrets.SELF_HOSTED_GITHUB_RUNNER_GCP_CREDENTIALS }}
+    concurrency:
+      group: ${{ github.ref == 'refs/heads/main' && github.run_id || github.sha }}-create-runner
+      cancel-in-progress: false
+
+  build:
+    runs-on: ${{ needs.create-runner.outputs.label }}
+    needs: create-runner
+    concurrency:
+      group: ${{ github.ref == 'refs/heads/main' && github.run_id || github.sha }}-build
+      cancel-in-progress: true
+    env:
+      DAZZLE_VERSION: 0.1.17
+      BUILDKIT_VERSION: 0.12.2
+    steps:
+      - name: 📥 Checkout workspace-images
+        uses: actions/checkout@v4
+        with:
+          repository: gitpod-io/workspace-images
+
+      - name: 🔧 Setup pre-commit
+        run: |
+          sudo apt-get install --yes python3-pip shellcheck
+          curl -sSL https://github.com/mvdan/sh/releases/download/v3.5.0/shfmt_v3.5.0_linux_amd64 -o shfmt
+          sudo mv shfmt /usr/local/bin/shfmt && sudo chmod +x /usr/local/bin/shfmt
+          sudo pip3 install pre-commit
+
+      - name: 🤓 Run pre-commit
+        run: |
+          pre-commit run --all-files
+
+      - name: 🔆 Install dazzle
+        run: |
+          curl -sSL https://github.com/gitpod-io/dazzle/releases/download/v${{env.DAZZLE_VERSION}}/dazzle_${{env.DAZZLE_VERSION}}_Linux_x86_64.tar.gz | sudo tar -xvz -C /usr/local/bin
+
+      - name: 🏗️ Setup buildkit
+        run: |
+          curl -sSL https://github.com/moby/buildkit/releases/download/v${{env.BUILDKIT_VERSION}}/buildkit-v${{env.BUILDKIT_VERSION}}.linux-amd64.tar.gz | sudo tar xvz -C /usr
+          sudo buildkitd --oci-worker=true --oci-worker-net=host --debug --group docker &
+          sudo su -c "while ! test -S /run/buildkit/buildkitd.sock; do sleep 0.1; done"
+          sudo chmod +777 /run/buildkit/buildkitd.sock
+
+      # A hack as GH action does not allow you to force override cache storing if there was a cache hit
+      # https://github.com/actions/cache/issues/628#issuecomment-986118455
+      - name: 🗄️ Force Save Registry Cache Per Sha
+        uses: actions/cache@v3
+        with:
+          path: ~/registry
+          key: ${{ runner.os }}-pull-request-cache-${{ github.sha }}
+
+      - name: 🗄️ Restore Registry Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/registry
+          key: ${{ runner.os }}-pull-request-cache-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-pull-request-cache-
+
+      - name: 📦 Setup local registry
+        run: |
+          docker run -it --detach --publish 5000:5000 --volume ~/registry:/var/lib/registry registry:2
+
+      - name: 🔨 Dazzle build
+        run: |
+          dazzle build localhost:5000/workspace-base-images
+
+      - name: 🖇️ Dazzle combine
+        run: |
+          dazzle combine localhost:5000/workspace-base-images --all
+
+  delete-runner:
+    if: always()
+    needs:
+      - create-runner
+      - build
+    uses: gitpod-io/gce-github-runner/.github/workflows/delete-vm.yml@main
+    secrets:
+      gcp_credentials: ${{ secrets.SELF_HOSTED_GITHUB_RUNNER_GCP_CREDENTIALS }}
+    with:
+      runner-label: ${{ needs.create-runner.outputs.label }}
+      machine-zone: ${{ needs.create-runner.outputs.machine-zone }}

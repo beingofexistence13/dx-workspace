@@ -1,0 +1,37 @@
+# this file makes this a leeway workspace
+defaultTarget: components:all
+defaultArgs:
+  imageRepoBase: "eu.gcr.io/gitpod-core-dev/build"
+  coreYarnLockBase: ../..
+  npmPublishTrigger: "false"
+  publishToNPM: true
+  publishToJBMarketplace: true
+  localAppVersion: unknown
+  codeCommit: 8efbeca1f1cdbc371efd7aae406dbff22d4865c0
+  codeVersion: 1.83.0
+  codeQuality: stable
+  noVerifyJBPlugin: false
+  intellijDownloadUrl: "https://download.jetbrains.com/idea/ideaIU-2023.2.2.tar.gz"
+  golandDownloadUrl: "https://download.jetbrains.com/go/goland-2023.2.2.tar.gz"
+  pycharmDownloadUrl: "https://download.jetbrains.com/python/pycharm-professional-2023.2.2.tar.gz"
+  phpstormDownloadUrl: "https://download.jetbrains.com/webide/PhpStorm-2023.2.2.tar.gz"
+  rubymineDownloadUrl: "https://download.jetbrains.com/ruby/RubyMine-2023.2.2.tar.gz"
+  webstormDownloadUrl: "https://download.jetbrains.com/webstorm/WebStorm-2023.2.2.tar.gz"
+  riderDownloadUrl: "https://download.jetbrains.com/rider/JetBrains.Rider-2023.2.2.tar.gz"
+  clionDownloadUrl: "https://download.jetbrains.com/cpp/CLion-2023.2.2.tar.gz"
+  jbBackendVersion: "latest"
+  dockerVersion: "20.10.24"
+  dockerComposeVersion: "2.21.0-gitpod.0"
+provenance:
+  enabled: true
+  slsa: true
+defaultVariant:
+  env:
+    - NODE_OPTIONS=--max_old_space_size=8192
+  srcs:
+    exclude:
+      # Make sure we don't include node_modules/**/*.ts by accident
+      - "**/node_modules/**"
+  config:
+    go:
+      lintCommand: ["sh", "-c", "golangci-lint run --disable govet,errcheck,typecheck,staticcheck,structcheck -e '.*declared but not used.*' --allow-parallel-runners --timeout 15m"]

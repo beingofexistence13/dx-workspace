@@ -1,0 +1,289 @@
+[
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "ec2policy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/EC2GitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "ekspolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/EKSGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "gitpodsetuprole",
+      "physicalResourceId": "GitpodSetupAndInitialEKSUserAdmin",
+      "resourceType": "AWS::IAM::Role",
+      "replacement": "False",
+      "scope": [
+        "Properties",
+        "Tags"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Tags",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "AssumeRolePolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "ManagedPolicyArns",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        },
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "Description",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "iampolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/IAMGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lambdapolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/LambdaGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "lbpolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/LoadBalancingGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "logspolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/LogsGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "secretspolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/SecretsGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "ssmrolestackinfoA1086A05",
+      "resourceType": "AWS::SSM::Parameter",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Add",
+      "logicalResourceId": "ssmroleversioninfo3CCE326A",
+      "resourceType": "AWS::SSM::Parameter",
+      "scope": [],
+      "details": []
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "storagepolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/StorageGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  },
+  {
+    "type": "Resource",
+    "resourceChange": {
+      "action": "Modify",
+      "logicalResourceId": "tagpolicy",
+      "physicalResourceId": "arn:aws:iam::505100584189:policy/TagsGitpodSetupPolicy",
+      "resourceType": "AWS::IAM::ManagedPolicy",
+      "replacement": "False",
+      "scope": [
+        "Properties"
+      ],
+      "details": [
+        {
+          "target": {
+            "attribute": "Properties",
+            "name": "PolicyDocument",
+            "requiresRecreation": "Never"
+          },
+          "evaluation": "Static",
+          "changeSource": "DirectModification"
+        }
+      ]
+    }
+  }
+]

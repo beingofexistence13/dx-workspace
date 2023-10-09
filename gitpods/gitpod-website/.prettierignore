@@ -1,0 +1,14 @@
+.netlify
+.svelte-kit/
+/node_modules/
+/src/functions/render
+build/
+.idea
+stars-cache.json
+.env
+package.json
+package-lock.json
+_redirects
+*.hbs
+/static/images/docs/gitpod-dedicated/reference/infrastructure-update-changelog/*/*.json
+/static/images/docs/gitpod-dedicated/reference/aws-iam-permission-requirements/*.json

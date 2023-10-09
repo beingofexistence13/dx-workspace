@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="theme-color" content="#333333" />
+		<meta
+			name="google-site-verification"
+			content="NBio3hCkfn2FKJpqZritJpXuyKo54noPGZzWsjDIp-M"
+		/>
+
+		<script>
+			if (
+				window.location.pathname.length <= 1 &&
+				window.location.hash.indexOf('https://') > -1
+			) {
+				window.location.replace(
+					'https://gitpod.io/' + window.location.hash,
+				);
+			}
+		</script>
+		<script src="/lottie/lottie-interactivity.js" async="false"></script>
+		<link
+			rel="preload"
+			as="font"
+			href="/fonts/ABCDiatype-Regular.woff"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			as="font"
+			href="/fonts/ABCDiatype-Bold.woff"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" rel="preload" href="/font.css" as="style" />
+		<link
+			rel="manifest"
+			href="/manifest.json"
+			crossorigin="use-credentials"
+		/>
+		<!-- We are preloading the VS Code Desktop Screenshot so that it get's rendered instantly as the toggle is switched. -->
+		<link
+			rel="preload"
+			as="image"
+			href="/images/index/vscode-desktop.webp"
+		/>
+		<link rel="icon" type="image/png" href="/favicon192.png" />
+
+		<!-- This contains the contents of the <svelte:head> component, if
+	     the current page has one -->
+		%sveltekit.head%
+	</head>
+	<body>
+		<script>
+			const theme = localStorage.getItem('theme');
+			const darkMediaQuery = window.matchMedia(
+				'(prefers-color-scheme: dark)',
+			);
+
+			if (theme === null) {
+				localStorage.setItem('theme', 'system');
+				if (darkMediaQuery.matches) {
+					document.body.classList.add('dark');
+				} else {
+					document.body.classList.add('light');
+				}
+			} else if (theme === 'dark') {
+				document.body.classList.add('dark');
+			} else if (theme === 'light') {
+				document.body.classList.add('light');
+			} else if (
+				window.matchMedia('(prefers-color-scheme: dark)').matches
+			) {
+				document.body.classList.add('dark');
+			} else {
+				document.body.classList.add('light');
+			}
+
+			darkMediaQuery.addEventListener('change', () => {
+				const storedTheme = localStorage.getItem('theme');
+				if (storedTheme === 'system') {
+					console.log('Called.');
+					if (
+						window.matchMedia('(prefers-color-scheme: dark)')
+							.matches
+					) {
+						document.body.classList.replace('light', 'dark');
+					} else {
+						document.body.classList.replace('dark', 'light');
+					}
+				}
+			});
+		</script>
+		<div id="svelte">%sveltekit.body%</div>
+	</body>
+</html>

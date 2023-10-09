@@ -1,0 +1,32 @@
+- desc: it should run node
+  command: [node --version]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0
+  - stdout.indexOf("v18")  != -1 ||
+    stdout.indexOf("v20")  != -1
+- desc: it should have yarn
+  command: [yarn --version]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0
+- desc: it should have pnpm
+  command: [pnpm --version]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0
+- desc: it should have typescript
+  command: [tsc --version]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0
+- desc: it should have working yarn
+  command: [yarn global add envinfo]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0
+- desc: it should have working pnpm
+  command: [pnpm i -g envinfo]
+  entrypoint: [bash, -i, -c]
+  assert:
+  - status == 0

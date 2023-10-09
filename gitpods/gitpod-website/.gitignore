@@ -1,0 +1,15 @@
+.DS_Store
+.netlify
+.svelte-kit/
+/lambda/
+/node_modules/
+/src/functions/render
+/src/node_modules/@sapper/
+build/
+cypress/screenshots
+cypress/videos
+yarn-error.log
+yarn.lock
+.idea
+.stars-cache
+.env

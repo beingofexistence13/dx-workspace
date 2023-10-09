@@ -1,0 +1,476 @@
+/**
+ * Copyright (c) 2021 Gitpod GmbH. All rights reserved.
+ * Licensed under the GNU Affero General Public License (AGPL).
+ * See License.AGPL.txt in the project root for license information.
+ */
+
+import { inject, injectable } from "inversify";
+import { DBWithTracing, ProjectDB, TracedWorkspaceDB, WebhookEventDB, WorkspaceDB } from "@gitpod/gitpod-db/lib";
+import {
+    Branch,
+    PrebuildWithStatus,
+    CreateProjectParams,
+    FindPrebuildsParams,
+    Project,
+    User,
+    PrebuildEvent,
+} from "@gitpod/gitpod-protocol";
+import { HostContextProvider } from "../auth/host-context-provider";
+import { RepoURL } from "../repohost";
+import { log } from "@gitpod/gitpod-protocol/lib/util/logging";
+import {
+    PartialProject,
+    PrebuildSettings,
+    ProjectSettings,
+    ProjectUsage,
+} from "@gitpod/gitpod-protocol/lib/teams-projects-protocol";
+import { IAnalyticsWriter } from "@gitpod/gitpod-protocol/lib/analytics";
+import { ErrorCodes, ApplicationError } from "@gitpod/gitpod-protocol/lib/messaging/error";
+import { URL } from "url";
+import { Authorizer, SYSTEM_USER } from "../authorization/authorizer";
+import { TransactionalContext } from "@gitpod/gitpod-db/lib/typeorm/transactional-db-impl";
+import { ScmService } from "./scm-service";
+import { daysBefore, isDateSmaller } from "@gitpod/gitpod-protocol/lib/util/timeutil";
+
+@injectable()
+export class ProjectsService {
+    constructor(
+        @inject(ProjectDB) private readonly projectDB: ProjectDB,
+        @inject(TracedWorkspaceDB) private readonly workspaceDb: DBWithTracing<WorkspaceDB>,
+        @inject(HostContextProvider) private readonly hostContextProvider: HostContextProvider,
+        @inject(IAnalyticsWriter) private readonly analytics: IAnalyticsWriter,
+        @inject(WebhookEventDB) private readonly webhookEventDB: WebhookEventDB,
+        @inject(Authorizer) private readonly auth: Authorizer,
+        @inject(ScmService) private readonly scmService: ScmService,
+    ) {}
+
+    async getProject(userId: string, projectId: string): Promise<Project> {
+        await this.auth.checkPermissionOnProject(userId, "read_info", projectId);
+        const project = await this.projectDB.findProjectById(projectId);
+        if (!project) {
+            throw new ApplicationError(ErrorCodes.NOT_FOUND, `Project ${projectId} not found.`);
+        }
+        return this.migratePrebuildSettingsOnDemand(project);
+    }
+
+    async getProjects(userId: string, orgId: string): Promise<Project[]> {
+        await this.auth.checkPermissionOnOrganization(userId, "read_info", orgId);
+        const projects = await this.projectDB.findProjects(orgId);
+        const filteredProjects = await this.filterByReadAccess(userId, projects);
+        return Promise.all(filteredProjects.map((p) => this.migratePrebuildSettingsOnDemand(p)));
+    }
+
+    async findProjects(
+        userId: string,
+        searchOptions: {
+            offset?: number;
+            limit?: number;
+            orderBy?: keyof Project;
+            orderDir?: "ASC" | "DESC";
+            searchTerm?: string;
+        },
+    ): Promise<{ total: number; rows: Project[] }> {
+        const projects = await this.projectDB.findProjectsBySearchTerm(
+            searchOptions.offset || 0,
+            searchOptions.limit || 1000,
+            searchOptions.orderBy || "creationTime",
+            searchOptions.orderDir || "ASC",
+            searchOptions.searchTerm || "",
+        );
+        const rows = await this.filterByReadAccess(userId, projects.rows);
+        const total = projects.total;
+        return {
+            total,
+            rows: await Promise.all(rows.map((p) => this.migratePrebuildSettingsOnDemand(p))),
+        };
+    }
+
+    private async filterByReadAccess(userId: string, projects: Project[]) {
+        const filteredProjects: Project[] = [];
+        const filter = async (project: Project) => {
+            if (await this.auth.hasPermissionOnProject(userId, "read_info", project.id)) {
+                return project;
+            }
+            return undefined;
+        };
+
+        for (const projectPromise of projects.map(filter)) {
+            const project = await projectPromise;
+            if (project) {
+                filteredProjects.push(project);
+            }
+        }
+        return filteredProjects;
+    }
+
+    async findProjectsByCloneUrl(userId: string, cloneUrl: string): Promise<Project[]> {
+        const projects = await this.projectDB.findProjectsByCloneUrl(cloneUrl);
+        const result: Project[] = [];
+        for (const project of projects) {
+            if (await this.auth.hasPermissionOnProject(userId, "read_info", project.id)) {
+                result.push(project);
+            }
+        }
+        return Promise.all(result.map((p) => this.migratePrebuildSettingsOnDemand(p)));
+    }
+
+    async markActive(
+        userId: string,
+        projectId: string,
+        kind: keyof ProjectUsage = "lastWorkspaceStart",
+    ): Promise<void> {
+        await this.auth.checkPermissionOnProject(userId, "read_info", projectId);
+        await this.projectDB.updateProjectUsage(projectId, {
+            [kind]: new Date().toISOString(),
+        });
+    }
+
+    async getProjectOverview(user: User, projectId: string): Promise<Project.Overview> {
+        const project = await this.getProject(user.id, projectId);
+        await this.auth.checkPermissionOnProject(user.id, "read_info", project.id);
+        // Check for a cached project overview (fast!)
+        const cachedPromise = this.projectDB.findCachedProjectOverview(project.id);
+
+        // ...but also refresh the cache on every request (asynchronously / in the background)
+        const refreshPromise = this.getBranchDetails(user, project).then((branches) => {
+            const overview = { branches };
+            // No need to await here
+            this.projectDB.storeCachedProjectOverview(project.id, overview).catch((error) => {
+                log.error(`Could not store cached project overview: ${error}`, { cloneUrl: project.cloneUrl });
+            });
+            return overview;
+        });
+
+        const cachedOverview = await cachedPromise;
+        if (cachedOverview) {
+            return cachedOverview;
+        }
+        return await refreshPromise;
+    }
+
+    private getRepositoryProvider(project: Project) {
+        const parsedUrl = RepoURL.parseRepoUrl(project.cloneUrl);
+        const repositoryProvider =
+            parsedUrl && this.hostContextProvider.get(parsedUrl.host)?.services?.repositoryProvider;
+        return repositoryProvider;
+    }
+
+    async getBranchDetails(user: User, project: Project, branchName?: string): Promise<Project.BranchDetails[]> {
+        await this.auth.checkPermissionOnProject(user.id, "read_info", project.id);
+
+        const parsedUrl = RepoURL.parseRepoUrl(project.cloneUrl);
+        if (!parsedUrl) {
+            throw new ApplicationError(ErrorCodes.INTERNAL_SERVER_ERROR, `Invalid clone URL on project ${project.id}.`);
+        }
+        const { owner, repo } = parsedUrl;
+        const repositoryProvider = this.getRepositoryProvider(project);
+        if (!repositoryProvider) {
+            return [];
+        }
+        const repository = await repositoryProvider.getRepo(user, owner, repo);
+        const branches: Branch[] = [];
+        if (branchName) {
+            const details = await repositoryProvider.getBranch(user, owner, repo, branchName);
+            branches.push(details);
+        } else {
+            branches.push(...(await repositoryProvider.getBranches(user, owner, repo)));
+        }
+
+        const result: Project.BranchDetails[] = [];
+        for (const branch of branches) {
+            const { name, commit, htmlUrl } = branch;
+            result.push({
+                name,
+                url: htmlUrl,
+                changeAuthor: commit.author,
+                changeDate: commit.authorDate,
+                changeHash: commit.sha,
+                changeTitle: commit.commitMessage,
+                changeAuthorAvatar: commit.authorAvatarUrl,
+                isDefault: repository.defaultBranch === branch.name,
+            });
+        }
+        result.sort((a, b) => (b.changeDate || "").localeCompare(a.changeDate || ""));
+        return result;
+    }
+
+    async createProject(
+        { name, slug, cloneUrl, teamId, appInstallationId }: CreateProjectParams,
+        installer: User,
+        projectSettingsDefaults: ProjectSettings = { prebuilds: Project.PREBUILD_SETTINGS_DEFAULTS },
+    ): Promise<Project> {
+        await this.auth.checkPermissionOnOrganization(installer.id, "create_project", teamId);
+
+        if (cloneUrl.length >= 1000) {
+            throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Clone URL must be less than 1k characters.");
+        }
+
+        try {
+            new URL(cloneUrl);
+        } catch (err) {
+            throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Clone URL must be a valid URL.");
+        }
+
+        const parsedUrl = RepoURL.parseRepoUrl(cloneUrl);
+        if (!parsedUrl) {
+            throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Clone URL must be a repository URL.");
+        }
+
+        const project = Project.create({
+            name,
+            cloneUrl,
+            teamId,
+            appInstallationId,
+            settings: projectSettingsDefaults,
+        });
+
+        try {
+            await this.projectDB.transaction(async (db) => {
+                await db.storeProject(project);
+
+                await this.auth.addProjectToOrg(installer.id, teamId, project.id);
+                await this.auth.setProjectVisibility(installer.id, project.id, teamId, "org-public");
+            });
+        } catch (err) {
+            await this.auth.removeProjectFromOrg(installer.id, teamId, project.id);
+            throw err;
+        }
+
+        this.analytics.track({
+            userId: installer.id,
+            event: "project_created",
+            properties: {
+                project_id: project.id,
+                name: name,
+                clone_url: cloneUrl,
+                owner_type: "team",
+                owner_id: teamId,
+                app_installation_id: appInstallationId,
+            },
+        });
+        return project;
+    }
+
+    public async setVisibility(userId: string, projectId: string, visibility: Project.Visibility): Promise<void> {
+        await this.auth.checkPermissionOnProject(userId, "write_info", projectId);
+        const project = await this.getProject(userId, projectId);
+        //TODO store this information in the DB
+        await this.auth.setProjectVisibility(userId, projectId, project.teamId, visibility);
+    }
+
+    async deleteProject(userId: string, projectId: string, transactionCtx?: TransactionalContext): Promise<void> {
+        await this.auth.checkPermissionOnProject(userId, "delete", projectId);
+
+        let orgId: string | undefined = undefined;
+        try {
+            await this.projectDB.transaction(transactionCtx, async (db) => {
+                const project = await db.findProjectById(projectId);
+                if (!project) {
+                    throw new Error("Project does not exist");
+                }
+                orgId = project.teamId;
+                await db.markDeleted(projectId);
+
+                await this.auth.removeProjectFromOrg(userId, orgId, projectId);
+            });
+            this.analytics.track({
+                userId,
+                event: "project_deleted",
+                properties: {
+                    project_id: projectId,
+                },
+            });
+        } catch (err) {
+            if (orgId) {
+                await this.auth.addProjectToOrg(userId, orgId, projectId);
+            }
+            throw err;
+        }
+    }
+
+    async findPrebuilds(userId: string, params: FindPrebuildsParams): Promise<PrebuildWithStatus[]> {
+        const { projectId, prebuildId } = params;
+        await this.auth.checkPermissionOnProject(userId, "read_prebuild", projectId);
+        const project = await this.projectDB.findProjectById(projectId);
+        if (!project) {
+            throw new ApplicationError(ErrorCodes.NOT_FOUND, `Project ${projectId} not found.`);
+        }
+        const parsedUrl = RepoURL.parseRepoUrl(project.cloneUrl);
+        if (!parsedUrl) {
+            throw new ApplicationError(ErrorCodes.INTERNAL_SERVER_ERROR, `Invalid clone URL on project ${projectId}.`);
+        }
+        const result: PrebuildWithStatus[] = [];
+
+        if (prebuildId) {
+            const pbws = await this.workspaceDb.trace({}).findPrebuiltWorkspaceById(prebuildId);
+            const info = (await this.workspaceDb.trace({}).findPrebuildInfos([prebuildId]))[0];
+            if (info && pbws) {
+                const r: PrebuildWithStatus = { info, status: pbws.state };
+                if (pbws.error) {
+                    r.error = pbws.error;
+                }
+                result.push(r);
+            }
+        } else {
+            let limit = params.limit !== undefined ? params.limit : 30;
+            if (params.latest) {
+                limit = 1;
+            }
+            const branch = params.branch;
+            const prebuilds = await this.workspaceDb
+                .trace({})
+                .findPrebuiltWorkspacesByProject(project.id, branch, limit);
+            const infos = await this.workspaceDb.trace({}).findPrebuildInfos([...prebuilds.map((p) => p.id)]);
+            result.push(
+                ...infos.map((info) => {
+                    const p = prebuilds.find((p) => p.id === info.id)!;
+                    const r: PrebuildWithStatus = { info, status: p.state };
+                    if (p.error) {
+                        r.error = p.error;
+                    }
+                    return r;
+                }),
+            );
+        }
+        return result;
+    }
+
+    async updateProject(user: User, partialProject: PartialProject): Promise<void> {
+        await this.auth.checkPermissionOnProject(user.id, "write_info", partialProject.id);
+
+        const partial: PartialProject = { id: partialProject.id };
+        if (partialProject.name) {
+            partialProject.name = partialProject.name.trim();
+            // check it is between 0 and 32 characters
+            if (partialProject.name.length > 32) {
+                throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Project name must be less than 32 characters.");
+            }
+            if (partialProject.name.length === 0) {
+                throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Project name must not be empty.");
+            }
+        }
+        const allowedFields: (keyof Project)[] = ["settings", "name"];
+        for (const f of allowedFields) {
+            if (f in partialProject) {
+                (partial as any)[f] = partialProject[f];
+            }
+        }
+        await this.handleEnablePrebuild(user, partialProject);
+        return this.projectDB.updateProject(partialProject);
+    }
+
+    private async handleEnablePrebuild(user: User, partialProject: PartialProject): Promise<void> {
+        const enablePrebuildsNew = partialProject?.settings?.prebuilds?.enable;
+        if (typeof enablePrebuildsNew === "boolean") {
+            const project = await this.projectDB.findProjectById(partialProject.id);
+            if (!project) {
+                return;
+            }
+            const enablePrebuildsPrev = !!project.settings?.prebuilds?.enable;
+            const installWebhook = enablePrebuildsNew && !enablePrebuildsPrev;
+            const uninstallWebhook = !enablePrebuildsNew && enablePrebuildsPrev;
+            if (installWebhook) {
+                await this.scmService.installWebhookForPrebuilds(project, user);
+            }
+            if (uninstallWebhook) {
+                // TODO
+                // await this.scmService.uninstallWebhookForPrebuilds(project, user);
+            }
+        }
+    }
+
+    async isProjectConsideredInactive(userId: string, projectId: string): Promise<boolean> {
+        const isOlderThan7Days = (d1: string) => isDateSmaller(d1, daysBefore(new Date().toISOString(), 7));
+
+        await this.auth.checkPermissionOnProject(userId, "read_info", projectId);
+        const usage = await this.projectDB.getProjectUsage(projectId);
+        if (!usage?.lastWorkspaceStart) {
+            const project = await this.projectDB.findProjectById(projectId);
+            return !project || isOlderThan7Days(project.creationTime);
+        }
+        return isOlderThan7Days(usage.lastWorkspaceStart);
+    }
+
+    async getPrebuildEvents(userId: string, projectId: string): Promise<PrebuildEvent[]> {
+        const project = await this.getProject(userId, projectId);
+        const events = await this.webhookEventDB.findByCloneUrl(project.cloneUrl, 100);
+        return events.map((we) => ({
+            id: we.id,
+            creationTime: we.creationTime,
+            cloneUrl: we.cloneUrl,
+            branch: we.branch,
+            commit: we.commit,
+            prebuildId: we.prebuildId,
+            projectId: we.projectId,
+            status: we.prebuildStatus || we.status,
+            message: we.message,
+        }));
+    }
+
+    private async migratePrebuildSettingsOnDemand(project: Project): Promise<Project> {
+        if (!!project.settings?.prebuilds) {
+            return project; // already migrated
+        }
+        try {
+            const logCtx: any = { oldSettings: { ...project.settings } };
+            const newPrebuildSettings: PrebuildSettings = { enable: false, ...Project.PREBUILD_SETTINGS_DEFAULTS };
+
+            // if workspaces were running in the past week
+            const isInactive = await this.isProjectConsideredInactive(SYSTEM_USER, project.id);
+            logCtx.isInactive = isInactive;
+            if (!isInactive) {
+                const sevenDaysAgo = new Date(daysBefore(new Date().toISOString(), 7));
+                const count = await this.workspaceDb.trace({}).countUnabortedPrebuildsSince(project.id, sevenDaysAgo);
+                logCtx.count = count;
+                if (count > 0) {
+                    const defaults = Project.PREBUILD_SETTINGS_DEFAULTS;
+                    newPrebuildSettings.enable = true;
+                    newPrebuildSettings.prebuildInterval = Math.max(
+                        project.settings?.prebuildEveryNthCommit || 0,
+                        defaults.prebuildInterval,
+                    );
+
+                    newPrebuildSettings.branchStrategy = !!project.settings?.prebuildBranchPattern
+                        ? "matched-branches"
+                        : defaults.branchStrategy;
+                    newPrebuildSettings.branchMatchingPattern =
+                        project.settings?.prebuildBranchPattern || defaults.branchMatchingPattern;
+                    newPrebuildSettings.workspaceClass = project.settings?.workspaceClasses?.prebuild;
+                }
+            }
+
+            // update new settings
+            project = (await this.projectDB.findProjectById(project.id))!;
+            if (!project) {
+                throw new ApplicationError(ErrorCodes.INTERNAL_SERVER_ERROR, "Not found");
+            }
+            if (!!project.settings?.prebuilds) {
+                return project; // already migrated
+            }
+            const newSettings = { ...project.settings };
+            project.settings = newSettings;
+            project.settings.prebuilds = newPrebuildSettings;
+            delete newSettings.enablePrebuilds;
+            delete newSettings.prebuildBranchPattern;
+            delete newSettings.prebuildDefaultBranchOnly;
+            delete newSettings.prebuildEveryNthCommit;
+            delete newSettings.allowUsingPreviousPrebuilds;
+            delete newSettings.keepOutdatedPrebuildsRunning;
+            delete newSettings.useIncrementalPrebuilds;
+            delete newSettings.workspaceClasses?.prebuild;
+            await this.projectDB.updateProject({
+                id: project.id,
+                settings: project.settings,
+            });
+            logCtx.newPrebuildSettings = newPrebuildSettings;
+            log.info("Prebuild settings migrated.", { projectId: project.id, logCtx });
+
+            return project;
+        } catch (error) {
+            log.error("Prebuild settings migration failed", error, {
+                projectId: project.id,
+            });
+            return project;
+        }
+    }
+}

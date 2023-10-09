@@ -1,0 +1,187 @@
+.content-docs,
+.content-blog {
+	line-height: 177.7%;
+
+	h2 + * {
+		@apply mt-micro;
+	}
+
+	h3 + * {
+		@apply mt-macro;
+	}
+
+	h4 + * {
+		@apply mt-1;
+	}
+
+	p {
+		margin-top: 0;
+	}
+
+	a + p {
+		@apply mt-micro;
+	}
+
+	p + p,
+	p + ul,
+	ul + p {
+		margin-top: var(--macro);
+	}
+
+	li {
+		+ li {
+			margin-top: var(--macro);
+		}
+	}
+
+	// Code blocks
+	:not(pre) > code {
+		padding: 0.15rem 0.35rem;
+		border-radius: 0.4rem;
+		font-size: 0.9em;
+		line-height: 1rem;
+		background: var(--brand-light);
+		white-space: normal;
+		white-space: nowrap;
+		color: #565451;
+	}
+
+	:where(p):not(:where([class~='not-prose'] *)) {
+		margin-bottom: 0rem !important;
+	}
+
+	blockquote code {
+		background: #ffb45b;
+	}
+
+	pre {
+		&:not(.language-null) {
+			background: var(--card);
+			border-radius: 12px;
+		}
+	}
+
+	thead {
+		@apply bg-sand-dark;
+	}
+
+	td:first-child {
+		@apply font-bold text-important;
+	}
+
+	th + th,
+	td + td {
+		@apply border-l border-solid border-divider;
+	}
+
+	th {
+		line-height: 1.5rem;
+	}
+
+	tr + tr {
+		@apply border-t border-solid border-divider;
+	}
+
+	a[href*="http://"]:not([href*="www.gitpod.io"]),
+  a[href*="https://"]:not([href*="www.gitpod.io"])
+	{
+		&::after {
+			content: '';
+			background: url('/svg/external.svg');
+			background-repeat: no-repeat;
+			display: inline-block;
+			height: 10px;
+			width: 10px;
+			margin: 0 0.2rem;
+			opacity: 0.6;
+			transition: all 0.2s 50ms;
+		}
+
+		&:hover::after {
+			opacity: 1;
+		}
+	}
+
+	[class*='btn'] {
+		&::after {
+			display: none !important;
+		}
+	}
+
+	a[href*="https://gitpod.io/#"]
+	{
+		white-space: initial !important;
+		&::after {
+			display: none !important;
+		}
+	}
+
+	.no-nowrap {
+		white-space: initial !important;
+		text-decoration: underline;
+	}
+}
+
+body.dark {
+	blockquote {
+		& a[href*="http://"]:not([href*="www.gitpod.io"]),
+  & a[href*="https://"]:not([href*="www.gitpod.io"])
+		{
+			&::after {
+				filter: none;
+			}
+		}
+	}
+
+	.content-docs,
+	.content-blog {
+		a[href*="http://"]:not([href*="www.gitpod.io"]),
+    a[href*="https://"]:not([href*="www.gitpod.io"])
+		{
+			&::after {
+				filter: invert(100%) grayscale(100%);
+			}
+		}
+	}
+
+	h2,
+	h2,
+	h3,
+	h4,
+	h4,
+	h5 {
+		&:hover,
+		&:focus {
+			.icon.icon-link::after {
+				filter: invert(100%) grayscale(100%);
+			}
+		}
+	}
+
+	.language-sh,
+	.language-undefined,
+	.language-shell {
+		color: #2aa198;
+	}
+
+	thead {
+		background: var(--divider);
+		border-color: var(--divider);
+
+		th {
+			border-color: var(--light-grey);
+		}
+	}
+}
+
+.prose {
+	@apply text-body;
+}
+
+img[src*='dark-theme'] {
+	@apply hidden dark:block;
+}
+
+img[src*='light-theme'] {
+	@apply block dark:hidden;
+}
