@@ -1,11 +1,17 @@
 # Yo ai mo
-1. openvscodeserver + gitpod + gitpod-website + workspace-images(gitpods)
+1. openvscodeserver + gitpod + gitpod-website + workspace-images -> (gitpods)
 2. remix ide
 3. stackblitzs
 4. codesandbox
-5. code-server + coder(coders)
-6. vim + neovim(vims)
-7. theia + vscodium + (extras)
+5. code-server + coder -> (coders)
+6. vim + neovim -> (vims)
+7. theia +
+   vscodium +
+   atom +
+   emacs +
+   netbeans +
+   notepad-plus-plus ++
+   spacemacs -> (extras)
 
 # Visual Studio Code - Open Source ("Code - OSS")
 
