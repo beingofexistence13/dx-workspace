@@ -10,8 +10,10 @@
   },
   "workspaces": [
     "coders/*",
-    "packages/*",
-    "templates/*"
+    "cores/*",
+    "extras/*",
+    "gitpods/*",
+    "vims/*"
   ],
   "scripts": {
     "build": "turbo run build",
