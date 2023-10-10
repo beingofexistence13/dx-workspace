@@ -8,9 +8,9 @@ USER gitpod
 # Install Node.js via nvm (Node Version Manager)
 # Fixed typo: changed "18" to "14" in the nvm install command, as version 14 is the latest LTS release.
 RUN bash -c ". .nvm/nvm.sh \
-    && nvm install 14 \
-    && nvm use 14 \
-    && nvm alias default 14"
+    && nvm install 16 \
+    && nvm use 16 \
+    && nvm alias default 16"
 
 # Fixed typo: changed "~/.bashrc.d" to "~/.bashrc" in the path of the nvm use command.
 RUN echo "nvm use default &>/dev/null" >> ~/.bashrc
@@ -27,7 +27,6 @@ RUN sudo apt-get update \
         fonts-droid-fallback vim-tiny nano libgconf2-dev libgtk-3-dev twm \
     && sudo apt-get clean && sudo rm -rf /var/cache/apt/* && sudo rm -rf /var/lib/apt/lists/* && sudo rm -rf /tmp/*
 
- Copy# package.json and yarn.lock files
 COPY package*.json ./
 
 # Copy all other project files
@@ -38,7 +37,7 @@ USER root
 RUN chown -R root ~/.config && chown -R root ~/.cache
 
 # Fixed typo: changed "yarn run installation" "y toarn install" to use the correct command.
-RUN yarn install
+RUN yarn installation && yarn run compile
 
 # Expose port 3000 for the application
 EXPOSE 5000
