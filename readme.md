@@ -126,3 +126,11 @@ Copyright (c) Microsoft Corporation. All rights reserved.
 
 Licensed under the [MIT](LICENSE.txt) license.
 
+
+
+### chip design
+https://info.efabless.com/chipignite-v2?gclid=CjwKCAjwyY6pBhA9EiwAMzmfwQ4N8WzsYJnNXlRW1qaWZVgH2tkpa13mm5Cw3SbUKIPN2Z6kOkUZhhoC4moQAvD_BwE
+
+### remix ide
+cd cores/remix && docker pull remixproject/remix-ide:latest && docker run -p 8080:80 remixproject/remix-ide:latest
+

@@ -50,5 +50,10 @@
     "vite": "^4.2.1",
     "vite-tsconfig-paths": "^4.0.8",
     "vitest": "^0.29.8"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
   }
 }
