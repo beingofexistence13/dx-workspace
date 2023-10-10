@@ -8,13 +8,7 @@
     "name": "beingofexistence",
     "url": "https://twitter.com/beingofexistence"
   },
-  "workspaces": [
-    "coders/*",
-    "cores/*",
-    "extras/*",
-    "gitpods/*",
-    "vims/*"
-  ],
+
   "scripts": {
     "build": "turbo run build",
     "build:cli": "turbo --filter=beingofexistence-workspace build",
