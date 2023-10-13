@@ -13,6 +13,4 @@
 [submodule "cores/docker-code-server"]
 	path = cores/docker-code-server
 	url = https://github.com/linuxserver/docker-code-server.git
-[submodule "docker-openvscode-server"]
-	path = docker-openvscode-server
-	url = https://github.com/linuxserver/docker-openvscode-server.git
+
