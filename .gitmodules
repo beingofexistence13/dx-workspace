@@ -1,0 +1,6 @@
+[submodule "coders/code-server"]
+	path = coders/code-server
+	url = https://github.com/coder/code-server.git
+[submodule "coders/coder"]
+	path = coders/coder
+	url = https://github.com/coder/coder.git
