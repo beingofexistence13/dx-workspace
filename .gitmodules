@@ -4,3 +4,15 @@
 [submodule "coders/coder"]
 	path = coders/coder
 	url = https://github.com/coder/coder.git
+[submodule "cores/codesandbox"]
+	path = cores/codesandbox
+	url = https://github.com/codesandbox/codesandbox-client.git
+[submodule "cores/remix"]
+	path = cores/remix
+	url = https://github.com/ethereum/remix-project.git
+[submodule "cores/docker-code-server"]
+	path = cores/docker-code-server
+	url = https://github.com/linuxserver/docker-code-server.git
+[submodule "docker-openvscode-server"]
+	path = docker-openvscode-server
+	url = https://github.com/linuxserver/docker-openvscode-server.git
