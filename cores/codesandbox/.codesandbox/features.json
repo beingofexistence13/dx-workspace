@@ -1,7 +1,0 @@
-{
-  "vue": {
-    "takeOverMode": false,
-    "inspector": false
-  },
-  "deno": false
-}

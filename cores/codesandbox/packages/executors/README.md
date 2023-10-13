@@ -1,3 +1,0 @@
-# Codesandbox Executors
-
-CSB Executors

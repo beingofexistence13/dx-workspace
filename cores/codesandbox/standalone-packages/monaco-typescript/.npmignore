@@ -1,8 +1,0 @@
-/.vscode/
-/scripts/
-/src/
-/test/
-/gulpfile.js
-/tsconfig.json
-/.npmignore
-/release/**/test/

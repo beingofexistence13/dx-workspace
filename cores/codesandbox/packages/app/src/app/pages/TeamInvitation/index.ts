@@ -1,1 +1,0 @@
-export { TeamInvitation } from './TeamInvitation';

@@ -1,1 +1,0 @@
-export { SolidSkeleton } from './SolidSkeleton';
